@@ -348,10 +348,6 @@ public class LATimesAndroidAppFunctionalTests{
 		assert savedArticleTitle.contentEquals(sectionFront.getNewsArticleCellTitle(0)) : "Saved Article was not found in Saved tab ";
 	}
 	
-	@Test(enabled = true)
-	public void test() throws InterruptedException{
-		sectionFront.clickHeaderMenuBtn();
-		sectionFront.swipeRightToLeftPortraitMode(driver);
-	}
+	
 	
 }
