@@ -1,3 +1,3 @@
 # Appium-Practice
 
-This is just for practicing Appium
+This is just for practicing Appium.
