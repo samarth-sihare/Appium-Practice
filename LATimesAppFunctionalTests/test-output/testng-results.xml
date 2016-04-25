@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="20934" started-at="2016-04-25T11:27:30Z" finished-at="2016-04-25T11:27:51Z">
+    <groups>
+    </groups>
+    <test name="SamsungGalaxyS5Tests" duration-ms="20934" started-at="2016-04-25T11:27:30Z" finished-at="2016-04-25T11:27:51Z">
+      <class name="com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests">
+        <test-method status="PASS" signature="testSetUp(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests@76e5b3b9]" name="testSetUp" is-config="true" duration-ms="13002" started-at="2016-04-25T16:57:30Z" finished-at="2016-04-25T16:57:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Samsung Galaxy S5]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[8001]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Android]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[com.tribune.universalnews.MainActivity]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[com.apptivateme.next.la]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetUp -->
+        <test-method status="PASS" signature="test()[pri:0, instance:com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests@76e5b3b9]" name="test" duration-ms="6187" started-at="2016-04-25T16:57:43Z" finished-at="2016-04-25T16:57:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test -->
+        <test-method status="PASS" signature="Exit()[pri:0, instance:com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests@76e5b3b9]" name="Exit" is-config="true" duration-ms="1688" started-at="2016-04-25T16:57:49Z" finished-at="2016-04-25T16:57:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Exit -->
+      </class> <!-- com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests -->
+    </test> <!-- SamsungGalaxyS5Tests -->
+  </suite> <!-- Suite -->
+</testng-results>
