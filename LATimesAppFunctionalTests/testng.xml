@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" >
+  	<test name="SamsungGalaxyS5Tests">
+		
+		<parameter name="device_Name" value="Samsung Galaxy S5"/>
+		<parameter name="device_ServerPort" value="8001"/>
+		<parameter name="platform_Name" value="Android"/>
+<!-- 		<parameter name="app_Activity" value="com.apptivateme.next.la.LAUniversalNewsStartUpActivity"/> -->
+		<parameter name="app_Activity" value="com.tribune.universalnews.MainActivity"/>
+		<parameter name="app_package" value="com.apptivateme.next.la"/>
+		
+		<classes>
+			<class name="com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests"/>
+<!-- 			<class name="com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests_ExtendsDriverClass"/> -->
+ 		</classes>
+ 		
+	</test>
+
+<!-- Test for s activity calendar 	 -->
+<!--   	<test name="SamsungGalaxyS5Tests">
+		
+		<parameter name="device_Name" value="Samsung Galaxy S5"/>
+		<parameter name="device_ServerPort" value="8001"/>
+		<parameter name="platform_Name" value="Android"/>
+		<parameter name="app_Activity" value="com.android.calendar.LaunchActivity"/>
+		<parameter name="app_package" value="com.android.calendar"/>
+		
+		<classes>
+			<class name="com.latime.app.functional.tests.LATimesAndroidAppFunctionalTests"/>
+ 		</classes>
+ 		
+	</test> -->
+	
+	
+</suite> <!-- Suite -->
