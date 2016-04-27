@@ -27,6 +27,7 @@ import com.latime.app.pageobject.SettingsScreenPageObject;
 import com.latime.app.pageobject.TestPageObject;
 
 import io.appium.java_client.android.AndroidDriver;
+import junit.framework.Assert;
 
 public class LATimesAndroidAppFunctionalTests{
 
@@ -70,6 +71,7 @@ public class LATimesAndroidAppFunctionalTests{
 		testPO = new TestPageObject(driver);
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		
 	}
 	
 
@@ -128,7 +130,7 @@ public class LATimesAndroidAppFunctionalTests{
 	public void verifySearchFunctionality() throws IOException{
 		
 		String searchKeyWord = "latimes";
-		
+
 		sectionFront.clickHeaderSearchBtn();
 		sectionFront.enterSearchTextInSearchTextBox(searchKeyWord);
 		sectionFront.clickKeyboardEnterKey();
@@ -347,6 +349,42 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion for Save Tab
 		assert savedArticleTitle.contentEquals(sectionFront.getNewsArticleCellTitle(0)) : "Saved Article was not found in Saved tab ";
 	}
+	
+	//Verify Share functionality on Facebook from Article Screen
+	@Test(enabled = false)
+	public void verifyShareFunctionalityOnFacebookFromArticleScreen(){
+		sectionFront.clickArticleTitle(0);
+		articleDetails.shareOnFaceBook();
+		//Assertion
+		assert articleDetails.isFacebookWidgetVisible() : "Facebook widget was not visible on clicking Facebook icon";
+	}	
+	
+	//Verify Share functionality on Twitter from Article Screen
+	@Test(enabled = false)
+	public void verifyShareFunctionalityOnTwitterFromArticleScreen(){
+		sectionFront.clickArticleTitle(0);
+		String articleToBeShared = articleDetails.getArticleTitle();
+		
+		articleDetails.shareOnTwitter();
+		//Assertion
+		assert articleDetails.isTwitterWidgetVisible() : "Twitter widget was not visible on clicking Twitter icon";
+		//Assertion for the shared article
+		assert articleToBeShared.contentEquals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
+	}	
+	
+	//Verify Share functionality on Email from Article Screen
+	@Test(enabled = true)
+	public void verifyShareFunctionalityOnEmailFromArticleScreen(){
+		sectionFront.clickArticleTitle(0);
+		String articleToBeShared = articleDetails.getArticleTitle();
+		
+		articleDetails.shareOnEmail();
+		//Assertion
+		assert articleDetails.isEmailAppVisible() : "Email App was not visible on clicking Email icon";
+		//Assertion for the shared article
+		assert articleToBeShared.contentEquals(articleDetails.getEmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
+	}	
+	
 	
 	
 	
