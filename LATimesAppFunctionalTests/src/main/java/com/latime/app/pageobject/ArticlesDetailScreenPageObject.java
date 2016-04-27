@@ -36,7 +36,7 @@ public class ArticlesDetailScreenPageObject extends CommonFunctions{
 			return unlockedArticleTitle.getText();
 		
 		else
-			return unlockedArticleTitle.getText();
+			return lockedArticleTitle.getText();
 	}
 	
 	public void clickSaveArticle(){
