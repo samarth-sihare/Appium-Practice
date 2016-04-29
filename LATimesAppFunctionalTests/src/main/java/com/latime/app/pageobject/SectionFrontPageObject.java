@@ -26,28 +26,28 @@ public class SectionFrontPageObject extends CommonFunctions{
     private WebElement headerSearchBtn;
     
     @FindAll({@FindBy(id = "tabTitle")})
-    private static List<WebElement> tabTitle;
+    private List<WebElement> tabTitle;
     
     @FindAll({@FindBy(id = "cell_topic")})
-    private static List<WebElement> cellTopics;
+    private List<WebElement> cellTopics;
     
     @FindAll({@FindBy(id = "cell_title")})
-    private static List<WebElement> cellTitle;
+    private List<WebElement> cellTitle;
 
     @FindAll({@FindBy(id = "cell_button_save")})
-    private static List<WebElement> articleCellBookMarkBtn;
+    private List<WebElement> articleCellBookMarkBtn;
     
     @FindAll({@FindBy(id = "toolbar_logo")})
-    private static List<WebElement> headerLogo;
+    private List<WebElement> headerLogo;
 
     @FindAll({@FindBy(id = "tv_no_saved_message")})
-    private static List<WebElement> noSavedMessages;
+    private List<WebElement> noSavedMessages;
     
     @FindBy(id = "search_src_text")
     private WebElement searchTextBox;
     
     @FindAll({@FindBy(id = "search_msg")})
-	private static List<WebElement> noSearchResultFoundText;
+	private List<WebElement> noSearchResultFoundText;
     
     @FindBy(id = "search_title")
     private WebElement searchResultFirstTitle;
@@ -57,6 +57,15 @@ public class SectionFrontPageObject extends CommonFunctions{
     
     @FindBy(name = "Saved")
     private WebElement saveTab;
+    
+    @FindBy(xpath = "//android.widget.TextView[contains(@selected, 'true')]")
+    private WebElement selected;
+    
+    @FindAll({@FindBy(name = "Downloading Content")})
+    private List<WebElement> downloadingContentNotification;
+    
+    @FindBy(name = "Cancel Download")
+    private WebElement notificationCancelDownloadBtn;
     
     
     public SectionFrontPageObject(AndroidDriver<WebElement> androidDriver) {
@@ -117,7 +126,8 @@ public class SectionFrontPageObject extends CommonFunctions{
     }
     
     
-    public int getSelectedTabTitleIndex(){
+    public int getSelectedTabTitleIndex() throws InterruptedException{
+    	Thread.sleep(1000);
     	int index = 0;
     	for (WebElement tab : tabTitle){
     		String attributeValue = tab.getAttribute("selected").toString();
@@ -127,6 +137,19 @@ public class SectionFrontPageObject extends CommonFunctions{
     		index++;
     	}
     	return index;
+    }
+    
+    
+    public String getSelectedTabTitle() throws InterruptedException{
+    	String tabTitleValue = null;
+    	for (WebElement tab : tabTitle){
+    		String attributeValue = tab.getAttribute("selected").toString();
+    		if(attributeValue.contains("true")){
+    			tabTitleValue = tab.getAttribute("text");
+    			break;
+    		}
+    	}
+    	return tabTitleValue;
     }
     
     
@@ -172,8 +195,28 @@ public class SectionFrontPageObject extends CommonFunctions{
     	Thread.sleep(3000);
     }
     
-    public String getlastTabTitle(){
-    	return tabTitle.get(tabTitle.size()-1).getText();
+    public int getlastTabIndex(){
+    	System.out.println(tabTitle.size());
+    	return tabTitle.size()-1;
     }
-   
+    
+    public String getlastTabTitle(){
+    	return tabTitle.get(getlastTabIndex()).getText();
+    }
+    
+    public void clickTabNextToSelectedTab() throws InterruptedException{
+    	tabTitle.get(getSelectedTabTitleIndex()+1).click();
+    }
+    
+    public void testMethod(){
+    	System.out.println(selected.getAttribute("resource-id").toString());
+    }
+    
+    public boolean isDownloadingContentNotificationVisible(){
+    	return downloadingContentNotification.size() != 0;
+    }
+    
+    public void clickNotificationCancelDownloadBtn(){
+    	notificationCancelDownloadBtn.click();
+    }
 }

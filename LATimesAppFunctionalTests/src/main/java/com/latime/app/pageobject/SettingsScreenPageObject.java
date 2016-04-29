@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.android.AndroidDriver;
 
-public class SettingsScreenPageObject{
+public class SettingsScreenPageObject extends CommonFunctions{
 	
 	
     AndroidDriver<WebElement> androidDriver;
@@ -25,84 +25,68 @@ public class SettingsScreenPageObject{
     @FindBy(id = "login_label")
     private WebElement screenTitle;
     
-	public SettingsScreenPageObject(AndroidDriver<WebElement> androidDriver) {
-		this.androidDriver = androidDriver;
-		PageFactory.initElements(androidDriver, this);
-	}
-          
+    @FindBy(name = "Email")
+    private WebElement emailLink;
     
+    @FindBy(name = "Phone")
+    private WebElement phoneLink;
+    
+	public SettingsScreenPageObject(AndroidDriver<WebElement> androidDriver) {
+		super(androidDriver);
+		this.androidDriver = androidDriver;
+//		PageFactory.initElements(androidDriver, this);
+	}
 
+    public String getStateOfToggleSwitchEnableNotification(){
+    	return toggleSwitch.get(0).getText();
+    }
 	
-//    public void setStateVibrateToggleSwitch(String valueON_OFF){
-//
-//    	if (!toggleSwitch.get(0).getText().contains("ON"))
-//    		toggleSwitch.get(0).click();
-//
-//    	switch (valueON_OFF.toUpperCase()){
-//    		case "ON": {
-//    			if(toggleSwitch.get(1).getText() == "ON")
-//    				toggleSwitch.get(1).click();
-//
-//    			break;
-//    		}
-//    		case "OFF":{
-//    			if(toggleSwitch.get(1).getText() == "OFF")
-//    				toggleSwitch.get(1).click();
-//
-//    			break;
-//    		}
-//    	}
-//    }
-	
-	
-    public String getStateOfToggleSwitchVibrate(){
+	public String getStateOfToggleSwitchVibrate(){
     	return toggleSwitch.get(1).getText();
     }
 
     public boolean isToggleSwitchVibrateEnabled(){
-    	String enabledState = toggleSwitch.get(1).getAttribute("enabled");
-    	
-    	if (enabledState == "true")
-    		return true;
-    	else 
-    		return false;
-    }
-    
-    public String getStateOfToggleSwitchEnableNotification(){
-    	return toggleSwitch.get(0).getText();
+    	System.out.println(toggleSwitch.get(1).getAttribute("enabled") + "--------enabled or disabled");
+    	return toggleSwitch.get(1).getAttribute("enabled").contains("true");
+
     }
     
     public void turnOnSwitchEnableNotification(){
-    	if (getStateOfToggleSwitchVibrate() == "OFF")
+    	if (getStateOfToggleSwitchEnableNotification().contains("OFF"))
     		toggleSwitch.get(0).click();
     }
     
 	public void turnOnSwitchVibrate(){
-		if (getStateOfToggleSwitchVibrate() == "OFF"){
+		if (getStateOfToggleSwitchVibrate().contains("OFF")){
 			turnOnSwitchEnableNotification();
 			toggleSwitch.get(1).click();
 		}
 	}
     
     public void turnOffSwitchEnableNotification(){
-    	if (getStateOfToggleSwitchVibrate() == "ON")
+    	System.out.println(getStateOfToggleSwitchEnableNotification());
+    	if (getStateOfToggleSwitchEnableNotification().contains("ON"))
     		toggleSwitch.get(0).click();
     }
     
 	public void turnOffSwitchVibrate(){
-		if (getStateOfToggleSwitchVibrate() == "ON"){
+		if (getStateOfToggleSwitchVibrate().contains("ON")){
 			turnOnSwitchEnableNotification();
 			toggleSwitch.get(1).click();
 		}
 			
 	}
 	
-    
-    
 	public String getTitle(){
     	return titles.get(0).getText();
 	}
 	
-	
+	public void clickEmailLink(){
+		emailLink.click();
+	}
     
+	public void clickPhoneLink(){
+		phoneLink.click();
+	}
+	
 }

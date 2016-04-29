@@ -74,40 +74,40 @@ public class LATimesAndroidAppFunctionalTests{
 		
 	}
 	
-
 	
 	@AfterMethod(alwaysRun = true)
 	public void Exit() {
 		driver.quit();
-		
 	}
 	
 	//Verify if user is able to swipe through tabs for corresponding right side tab in the main screen
 	@Test(enabled = false)
-	public void verifySwipeThroughTabsInMainScreen_ForRigthTab() throws InterruptedException{
-		int initialSelectedTab = sectionFront.getSelectedTabTitleIndex();
-
-		sectionFront.swipeRightToLeftPortraitMode(driver);
-		int afterActionSelectedTab = sectionFront.getSelectedTabTitleIndex();
+	public void verifySwipeThroughTabsInSectionFront_ForRigthTab() throws InterruptedException{
 		
-		//Assertion
-		assert (initialSelectedTab ==  afterActionSelectedTab - 1) : "Page was not swipped as expected";
+		while (sectionFront.getlastTabIndex() != sectionFront.getSelectedTabTitleIndex()){
+			String befoerActionSelectedTab = sectionFront.getSelectedTabTitle();
+		
+			sectionFront.swipeRightToLeftPortraitMode(driver);
+			String afterActionSelectedTab = sectionFront.getSelectedTabTitle();
+		
+			//Assertion
+			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "Page was not swipped as expected";
+		}
 	}
 	
-	//Verify if user is able to swipe through tabs for corresponding left side tab in the main screen
+	//Verify if user is able to Jump through tabs in Section front
 	@Test(enabled = false)
-	public void verifySwipeThroughTabsInMainScreen_ForLeftTab() throws InterruptedException{
-		//Verify if selected tab is first
-		if(sectionFront.getSelectedTabTitleIndex() == 0)
-			sectionFront.swipeRightToLeftPortraitMode(driver);
+	public void verifyJumpThroughTabsInSectionFront() throws InterruptedException{
 		
-		int initialSelectedTab = sectionFront.getSelectedTabTitleIndex();
+		while (sectionFront.getlastTabIndex() != sectionFront.getSelectedTabTitleIndex()){
+			String befoerActionSelectedTab = sectionFront.getSelectedTabTitle();
 		
-		sectionFront.swipeLeftToRightInPortraitMode(driver);
-		int afterActionSelectedTab = sectionFront.getSelectedTabTitleIndex();
+			sectionFront.clickTabNextToSelectedTab();
+			String afterActionSelectedTab = sectionFront.getSelectedTabTitle();
 		
-		//Assertion
-		assert (initialSelectedTab == afterActionSelectedTab + 1) : "Page was not swipped as expected";
+			//Assertion
+			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "Page was not swipped as expected";
+		}
 	}
 	
 	//Verify if user is able to follow the article topic 
@@ -328,7 +328,7 @@ public class LATimesAndroidAppFunctionalTests{
 		articleDetails.swipeRightToLeftPortraitMode(driver);
 		String articleAfterAction = articleDetails.getArticleTitle();
 		//Assertion
-		assert (articleBeforeAction == articleAfterAction) : "Page was not swipped as expected";  
+		assert (articleBeforeAction == articleAfterAction) : "Page was not swipped as expected";
 	}
 	
 	
@@ -372,20 +372,115 @@ public class LATimesAndroidAppFunctionalTests{
 		assert articleToBeShared.contentEquals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
 	}	
 	
-	//Verify Share functionality on Email from Article Screen
-	@Test(enabled = true)
-	public void verifyShareFunctionalityOnEmailFromArticleScreen(){
+	//Verify Share functionality on Gmail from Article Screen
+	@Test(enabled = false)
+	public void verifyShareFunctionalityOnGmailFromArticleScreen(){
 		sectionFront.clickArticleTitle(0);
 		String articleToBeShared = articleDetails.getArticleTitle();
 		
-		articleDetails.shareOnEmail();
+		articleDetails.shareOnGmail();
 		//Assertion
-		assert articleDetails.isEmailAppVisible() : "Email App was not visible on clicking Email icon";
+		assert articleDetails.isGmailAppVisible() : "Email App was not visible on clicking Gmail icon";
 		//Assertion for the shared article
-		assert articleToBeShared.contentEquals(articleDetails.getEmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
+		assert articleToBeShared.contentEquals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
+	}	
+		
+	//Verify Share functionality on Facebook from Article Screen Bottom
+	@Test(enabled = false)
+	public void verifyShareFunctionalityOnFacebookFromArticleScreenBottom(){
+		sectionFront.clickArticleTitle(0);
+		
+		articleDetails.clickFacebookIcon();
+		//Assertion
+		assert articleDetails.isFacebookWidgetVisible() : "Facebook widget was not visible on clicking Facebook icon";
 	}	
 	
+	//Verify Share functionality on Twitter from Article Screen Bottom
+	@Test(enabled = false)
+	public void verifyShareFunctionalityOnTwitterFromArticleScreenBottom(){
+		sectionFront.clickArticleTitle(0);
+		String articleToBeShared = articleDetails.getArticleTitle();
+		
+		articleDetails.clickTwitterIcon();
+		//Assertion
+		assert articleDetails.isTwitterWidgetVisible() : "Twitter widget was not visible on clicking Twitter icon";
+		//Assertion for the shared article
+		assert articleToBeShared.contentEquals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
+	}	
 	
+	//Verify Share functionality on Gmail from Article Screen Bottom
+	@Test(enabled = false)
+	public void verifyShareFunctionalityOnEmailFromArticleScreenBottom(){
+		sectionFront.clickArticleTitle(1);
+		String articleToBeShared = articleDetails.getArticleTitle();
+		
+		articleDetails.clickEmailIcon();
+		//Assertion
+		assert articleDetails.isGmailAppVisible() : "Gmail App was not visible on clicking Email icon";
+		//Assertion for the shared article
+		assert articleToBeShared.contentEquals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
+	}	
 	
+	//Verify if Vibrate switch is disabled on turning EnableNotifications Switch to OFF
+	@Test(enabled = false)
+	public void verifyEnableNotificationSwitchOffDisablesVibrateSwitch() throws InterruptedException{
+		sectionFront.clickHeaderMenuBtn();
+		menuScreen.clickMenuItemSettings();
+		
+		settingsScreen.turnOffSwitchEnableNotification();
+		
+		assert !settingsScreen.isToggleSwitchVibrateEnabled() : "Toggle Switch Vibrate was expected to be disbaled but is Inabled";
+	}
+	
+	//Verify if Vibrate switch is enabled on turning EnableNotifications Switch to ON
+	@Test(enabled = false)
+	public void verifyEnableNotificationSwitchOnEnablesVibrateSwitch() throws InterruptedException{
+		sectionFront.clickHeaderMenuBtn();
+		menuScreen.clickMenuItemSettings();
+		
+		settingsScreen.turnOnSwitchEnableNotification();
+		
+		assert settingsScreen.isToggleSwitchVibrateEnabled() : "Toggle Switch Vibrate was expected to be enabaled but is disabled";
+	}
+	
+	//Verify if used is able to contact support using email link in settings page
+	@Test(enabled = false)
+	public void verifySupportFunctionalityThroughEmailOnSettingsScreen() throws InterruptedException{
+		sectionFront.clickHeaderMenuBtn();
+		menuScreen.clickMenuItemSettings();
+		
+		settingsScreen.clickEmailLink();
+		settingsScreen.clickGmailIcon();
+		//Assertion Gmail App Visible
+		assert articleDetails.isGmailAppVisible() : "Gmail App was not visible on clicking Email icon";
+		//Assertion for the 'To' 
+		assert settingsScreen.getGmailAppToTextBoxText().contentEquals("<mobile@latimes.com>, ") : "TO email address is not as expected " ;
+		//Assertion for subject line
+		assert articleDetails.getGmailAppSubjectLineText().contentEquals("App support") : "Shared text doesnot have the actual article title";
+	}
+	
+	//Verify if used is able to contact support using email link in settings page
+	@Test(enabled = false)
+	public void verifySupportFunctionalityThroughPhoneOnSettingsScreen() throws InterruptedException{
+		sectionFront.clickHeaderMenuBtn();
+		menuScreen.clickMenuItemSettings();
+		settingsScreen.clickPhoneLink();
+		//Assertion is phone call app was invoked 
+		assert settingsScreen.isPhoneCallAppVisible() : "Phone Call app was not loaded on clicking the Phone line";
+		//Assertion is dialer screen is pre-filled with expected number
+		assert settingsScreen.getPhoneDialerScreenText().contentEquals("8002529141") : "Expected phone number was not pre-filled in phone dialer screen";
+	}
+	
+	//Verify if download starts on clicking Offline Reading menu option 
+	@Test(enabled = true)
+	public void verifyOfflineReadingFunctionality() throws InterruptedException{
+		sectionFront.clickHeaderMenuBtn();
+		menuScreen.clickMenuItemOfflineReading();
+		driver.openNotifications();
+		//Assertion for Notification
+		assert sectionFront.isDownloadingContentNotificationVisible() : "Downloading content notification was not found";
+		//Stop Downloading
+		sectionFront.clickNotificationCancelDownloadBtn();
+	}
 	
 }

@@ -40,14 +40,23 @@ public abstract class CommonFunctions extends AndroidTouchScreenGestures {
     @FindBy(xpath = "//android.widget.EditText[@resource-id='com.twitter.android:id/tweet_text']")
     private WebElement twitterSharedText;
     
-    @FindBy(name = "Email")
-    private WebElement emailShareIcon;
+    @FindBy(name = "Gmail")
+    private WebElement gmailShareIcon;
     
-    @FindAll({@FindBy(xpath = "//android.view.View[@package='com.android.email']")})
-    private List <WebElement> emailApp;
+    @FindAll({@FindBy(xpath = "//android.widget.FrameLayout[@package='com.google.android.gm']")})
+    private List <WebElement> gmailApp;
  
-    @FindBy(xpath = "//android.widget.EditText[@resource-id='com.android.email:id/composer_subject_edit']")
-    private WebElement EmailSubjectSharedText;
+    @FindAll({@FindBy(xpath = "//android.widget.EditText[@package='com.android.contacts']")})
+    private List <WebElement> phoneCallApp;
+    
+    @FindBy(id = "com.google.android.gm:id/to")
+    private WebElement gmailToTextBox;
+    
+    @FindBy(id = "com.google.android.gm:id/subject")
+    private WebElement gmailSubjectSharedText;
+    
+    @FindBy(id = "com.android.contacts:id/digits")
+    private WebElement phoneDialerScreen;
     
 	public CommonFunctions(AndroidDriver<WebElement> androidDriver) {
 		this.androidDriver = androidDriver;
@@ -92,20 +101,41 @@ public abstract class CommonFunctions extends AndroidTouchScreenGestures {
     	return actualTitle[0];
     	}
     
-    public void shareOnEmail(){
+    public void shareOnGmail(){
     	shareBtn.click();
-    	emailShareIcon.click();
+    	clickGmailIcon();
     }
     
-    public boolean isEmailAppVisible(){
-    	int twitterWidgerSize = emailApp.size() ;
-    	return twitterWidgerSize != 0;
+    public boolean isGmailAppVisible(){
+    	int gmailWidgerSize = gmailApp.size() ;
+    	return gmailWidgerSize != 0;
     }
     
-    public String getEmailAppSubjectSharedTitle(){
-    	String sharedText = EmailSubjectSharedText.getText();
+    public boolean isPhoneCallAppVisible(){
+    	int phoneCallAppSize = phoneCallApp.size() ;
+    	return phoneCallAppSize != 0;
+    }
+    
+    public String getGmailAppToTextBoxText(){
+    	return gmailToTextBox.getText();
+    }
+    
+    public String getGmailAppSubjectLineText(){
+    	return gmailSubjectSharedText.getText();
+    }
+    
+    public String getGmailAppSubjectSharedTitle(){
+    	String sharedText = getGmailAppSubjectLineText();
     	String[] actualTitle = sharedText.split("\\nhttp");
     	return actualTitle[0];
     }
     
+    public void clickGmailIcon(){
+    	gmailShareIcon.click();
+    }
+
+    public String  getPhoneDialerScreenText(){
+    	return phoneDialerScreen.getText();
+    }
+
 }
