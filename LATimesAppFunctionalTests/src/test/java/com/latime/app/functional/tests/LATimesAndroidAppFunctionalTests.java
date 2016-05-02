@@ -81,26 +81,12 @@ public class LATimesAndroidAppFunctionalTests{
 		driver.quit();
 	}
 	
-	//Verify if user lands on TOP NEWS section front on each app launch
-	@Test(enabled = false)
-	public void verifyDefaultLandingInSectionFront() throws InterruptedException{
-		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
-		
-		//Re-launch app after navigating to another tabs
-		sectionFront.clickTabNextToSelectedTab();
-		driver.closeApp();
-		driver.launchApp();
-		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
-		
-	}
-	
 	//Verify if user is able to swipe through tabs for corresponding right side tab in the main screen
 	@Test(enabled = false)
 	public void verifySwipeThroughTabsInSectionFront_ForRigthTab() throws InterruptedException{
 		
 		while (sectionFront.getlastTabIndex() != sectionFront.getSelectedTabTitleIndex()){
 			String befoerActionSelectedTab = sectionFront.getSelectedTabTitle();
-		
 			sectionFront.swipeRightToLeftPortraitMode(driver);
 			String afterActionSelectedTab = sectionFront.getSelectedTabTitle();
 		
@@ -342,7 +328,7 @@ public class LATimesAndroidAppFunctionalTests{
 		articleDetails.swipeRightToLeftPortraitMode(driver);
 		String articleAfterAction = articleDetails.getArticleTitle();
 		//Assertion
-		assert (articleBeforeAction == articleAfterAction) : "Page was not swipped as expected";
+		assert (articleBeforeAction != articleAfterAction) : "Page was not swipped as expected";
 	}
 	
 	
@@ -499,7 +485,7 @@ public class LATimesAndroidAppFunctionalTests{
 	
 	//Verify App Onboarding on first launch
 	@Test(enabled = false)
-	public void verifyAppOnboardingFunctionality(){
+	public void verifyAppOnboardingFunctionality() throws InterruptedException{
 		driver.resetApp();
 		//Assertion Screen 1
 		appOnboardingScreen.assertOnboardingScreenTitles("Hello", "First");
@@ -516,9 +502,9 @@ public class LATimesAndroidAppFunctionalTests{
 		appOnboardingScreen.clickNextBtn();
 		appOnboardingScreen.assertOnboardingScreenTitles("Follow Topics", "fourth");
 		
-		//Assertion for SectionFront
+		//Assertion for SectionFront if user is on TOP NEWS on section front
 		appOnboardingScreen.clickNextBtn();
-		assert sectionFront.isHeaderLogoDisplayed() : "Section front header logo was not displayed on clicking last onboarding screen GET STARTED button";
+		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
 						
 	}
 	
