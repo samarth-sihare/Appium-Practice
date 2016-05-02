@@ -3,4 +3,5 @@ LATimesAppFunctionalTests/.classpath
 LATimesAppFunctionalTests/.settings/gradle.prefs
 *.prefs
 *.class
-LATimesAppFunctionalTests/test-output/*
+LATimesAppFunctionalTests/test-output/
+LATimesAppFunctionalTests/bin/

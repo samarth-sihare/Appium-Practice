@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import com.latime.app.framework.properties.FrameworkProperties;
 import com.latime.app.pageobject.AccountLoginScreenPageObject;
 import com.latime.app.pageobject.AccountsScreenPageObject;
+import com.latime.app.pageobject.AppOnboardingScreenPageObject;
 import com.latime.app.pageobject.ArticlesDetailScreenPageObject;
 import com.latime.app.pageobject.EditSectionScreenPageObject;
 import com.latime.app.pageobject.SectionFrontPageObject;
@@ -42,7 +43,7 @@ public class LATimesAndroidAppFunctionalTests{
 	private EditSectionScreenPageObject editSectionScreen;
 	private SettingsScreenPageObject settingsScreen;
 	private ArticlesDetailScreenPageObject articleDetails;
-	private TestPageObject testPO;
+	private AppOnboardingScreenPageObject appOnboardingScreen;
 	
 	
 	@Parameters({"device_Name", "device_ServerPort", "platform_Name", "app_Activity", "app_package"})
@@ -68,7 +69,7 @@ public class LATimesAndroidAppFunctionalTests{
 		editSectionScreen = new EditSectionScreenPageObject(driver);
 		settingsScreen = new SettingsScreenPageObject(driver); 
 		articleDetails = new ArticlesDetailScreenPageObject(driver); 
-		testPO = new TestPageObject(driver);
+		appOnboardingScreen = new AppOnboardingScreenPageObject(driver);
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		
@@ -78,6 +79,19 @@ public class LATimesAndroidAppFunctionalTests{
 	@AfterMethod(alwaysRun = true)
 	public void Exit() {
 		driver.quit();
+	}
+	
+	//Verify if user lands on TOP NEWS section front on each app launch
+	@Test(enabled = false)
+	public void verifyDefaultLandingInSectionFront() throws InterruptedException{
+		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
+		
+		//Re-launch app after navigating to another tabs
+		sectionFront.clickTabNextToSelectedTab();
+		driver.closeApp();
+		driver.launchApp();
+		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
+		
 	}
 	
 	//Verify if user is able to swipe through tabs for corresponding right side tab in the main screen
@@ -443,7 +457,7 @@ public class LATimesAndroidAppFunctionalTests{
 		assert settingsScreen.isToggleSwitchVibrateEnabled() : "Toggle Switch Vibrate was expected to be enabaled but is disabled";
 	}
 	
-	//Verify if used is able to contact support using email link in settings page
+	//Verify if user is able to contact support using email link in settings page
 	@Test(enabled = false)
 	public void verifySupportFunctionalityThroughEmailOnSettingsScreen() throws InterruptedException{
 		sectionFront.clickHeaderMenuBtn();
@@ -454,25 +468,25 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion Gmail App Visible
 		assert articleDetails.isGmailAppVisible() : "Gmail App was not visible on clicking Email icon";
 		//Assertion for the 'To' 
-		assert settingsScreen.getGmailAppToTextBoxText().contentEquals("<mobile@latimes.com>, ") : "TO email address is not as expected " ;
+		assert settingsScreen.getGmailAppToTextBoxText().contentEquals("<mobile@latimes.com>, ") : "'TO' email address is not as expected " ;
 		//Assertion for subject line
 		assert articleDetails.getGmailAppSubjectLineText().contentEquals("App support") : "Shared text doesnot have the actual article title";
 	}
 	
-	//Verify if used is able to contact support using email link in settings page
+	//Verify if user is able to contact support using Phone link in settings page
 	@Test(enabled = false)
 	public void verifySupportFunctionalityThroughPhoneOnSettingsScreen() throws InterruptedException{
 		sectionFront.clickHeaderMenuBtn();
 		menuScreen.clickMenuItemSettings();
 		settingsScreen.clickPhoneLink();
-		//Assertion is phone call app was invoked 
+		//Assertion is phone call App was invoked 
 		assert settingsScreen.isPhoneCallAppVisible() : "Phone Call app was not loaded on clicking the Phone line";
 		//Assertion is dialer screen is pre-filled with expected number
 		assert settingsScreen.getPhoneDialerScreenText().contentEquals("8002529141") : "Expected phone number was not pre-filled in phone dialer screen";
 	}
 	
 	//Verify if download starts on clicking Offline Reading menu option 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void verifyOfflineReadingFunctionality() throws InterruptedException{
 		sectionFront.clickHeaderMenuBtn();
 		menuScreen.clickMenuItemOfflineReading();
@@ -481,6 +495,31 @@ public class LATimesAndroidAppFunctionalTests{
 		assert sectionFront.isDownloadingContentNotificationVisible() : "Downloading content notification was not found";
 		//Stop Downloading
 		sectionFront.clickNotificationCancelDownloadBtn();
+	}
+	
+	//Verify App Onboarding on first launch
+	@Test(enabled = false)
+	public void verifyAppOnboardingFunctionality(){
+		driver.resetApp();
+		//Assertion Screen 1
+		appOnboardingScreen.assertOnboardingScreenTitles("Hello", "First");
+		
+		//Assertion Screen 2
+		appOnboardingScreen.clickNextBtn();
+		appOnboardingScreen.assertOnboardingScreenTitles("Watch Ready", "Second");
+				
+		//Assertion Screen 3
+		appOnboardingScreen.clickNextBtn();
+		appOnboardingScreen.assertOnboardingScreenTitles("Save Stories", "Third");
+		
+		//Assertion Screen 4
+		appOnboardingScreen.clickNextBtn();
+		appOnboardingScreen.assertOnboardingScreenTitles("Follow Topics", "fourth");
+		
+		//Assertion for SectionFront
+		appOnboardingScreen.clickNextBtn();
+		assert sectionFront.isHeaderLogoDisplayed() : "Section front header logo was not displayed on clicking last onboarding screen GET STARTED button";
+						
 	}
 	
 }
