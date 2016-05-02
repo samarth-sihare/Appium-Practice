@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
@@ -106,7 +107,7 @@ public class LATimesAndroidAppFunctionalTests{
 			String afterActionSelectedTab = sectionFront.getSelectedTabTitle();
 		
 			//Assertion
-			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "Page was not swipped as expected";
+			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "User is unable to jump sections as expected";
 		}
 	}
 	
@@ -507,5 +508,5 @@ public class LATimesAndroidAppFunctionalTests{
 		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
 						
 	}
-	
+
 }
