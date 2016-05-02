@@ -6,8 +6,8 @@
 		<parameter name="device_Name" value="Samsung Galaxy S5"/>
 		<parameter name="device_ServerPort" value="8001"/>
 		<parameter name="platform_Name" value="Android"/>
-<!-- 		<parameter name="app_Activity" value="com.apptivateme.next.la.LAUniversalNewsStartUpActivity"/> -->
-		<parameter name="app_Activity" value="com.tribune.universalnews.MainActivity"/>
+		<parameter name="app_Activity" value="com.apptivateme.next.la.LAUniversalNewsStartUpActivity"/>
+<!-- 		<parameter name="app_Activity" value="com.tribune.universalnews.MainActivity"/> -->
 		<parameter name="app_package" value="com.apptivateme.next.la"/>
 		
 		<classes>
