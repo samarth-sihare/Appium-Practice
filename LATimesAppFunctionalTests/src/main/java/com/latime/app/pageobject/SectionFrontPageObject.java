@@ -19,6 +19,9 @@ public class SectionFrontPageObject extends CommonFunctions{
 	
     AndroidDriver<WebElement> androidDriver;
     
+    private String befoerActionSelectedTab;
+    private String afterActionSelectedTab;
+    
     @FindBy(className = "android.widget.ImageButton")
     private WebElement headerMenuBtn;
 
@@ -74,6 +77,15 @@ public class SectionFrontPageObject extends CommonFunctions{
 //		PageFactory.initElements(androidDriver, this);
 	}
 	
+    private WebElement lastTab(){
+    	return tabTitle.get(getlastTabIndex());
+    }
+    
+    private WebElement firstTab(){
+    	return tabTitle.get(0);
+    }
+    
+    
 	public boolean isHeaderLogoDisplayed(){
 		return headerLogo.size() != 0;
 	}
@@ -87,15 +99,6 @@ public class SectionFrontPageObject extends CommonFunctions{
     	waitForPageHeaderLogo();
 		headerMenuBtn.click();
     }
-    
-    public boolean menuBtnisVisible(){
-    	return headerMenuBtn.isDisplayed();
-    }
-    
-    public boolean menuBtnisEnabled(){
-    	return headerMenuBtn.isEnabled();
-    }
-	
     
 //	Search Related functions    
     public void clickHeaderSearchBtn() {
@@ -126,7 +129,7 @@ public class SectionFrontPageObject extends CommonFunctions{
     }
     
     
-    public int getSelectedTabTitleIndex() throws InterruptedException{
+    private int getSelectedTabTitleIndex() throws InterruptedException{
     	Thread.sleep(1000);
     	int index = 0;
     	for (WebElement tab : tabTitle){
@@ -192,11 +195,10 @@ public class SectionFrontPageObject extends CommonFunctions{
     
     public void clickCellTopic(int instance) throws InterruptedException{
     	cellTopics.get(instance).click();
-    	Thread.sleep(3000);
+    	Thread.sleep(2000);
     }
     
-    public int getlastTabIndex(){
-    	System.out.println(tabTitle.size());
+    private int getlastTabIndex(){
     	return tabTitle.size()-1;
     }
     
@@ -208,10 +210,6 @@ public class SectionFrontPageObject extends CommonFunctions{
     	tabTitle.get(getSelectedTabTitleIndex()+1).click();
     }
     
-    public void testMethod(){
-    	System.out.println(selected.getAttribute("resource-id").toString());
-    }
-    
     public boolean isDownloadingContentNotificationVisible(){
     	return downloadingContentNotification.size() != 0;
     }
@@ -219,4 +217,57 @@ public class SectionFrontPageObject extends CommonFunctions{
     public void clickNotificationCancelDownloadBtn(){
     	notificationCancelDownloadBtn.click();
     }
+    
+    public void checkSwipeSectionFrontToLastTab() throws InterruptedException{
+    	while (getlastTabIndex() != getSelectedTabTitleIndex()){
+			String befoerActionSelectedTab = getSelectedTabTitle();
+			swipeRightToLeftPortraitMode(androidDriver);
+			String afterActionSelectedTab = getSelectedTabTitle();
+			
+			assert (befoerActionSelectedTab ==  afterActionSelectedTab) : "Page was not swipped as expected"; 
+			
+    	}
+    }
+    
+    public void checkJumpSectionFrontToLastTab() throws InterruptedException{
+		while (getlastTabIndex() != getSelectedTabTitleIndex()){
+			String befoerActionSelectedTab = getSelectedTabTitle();
+		
+			clickTabNextToSelectedTab();
+			String afterActionSelectedTab = getSelectedTabTitle();
+		
+			//Assertion
+			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "User is unable to jump sections as expected";
+		}
+
+    }
+    
+    public void findAndClickTabWithTitle(String jumpToTab){
+    	
+    	boolean clicked = false;
+    	
+    	while(clicked == false){
+    		for (WebElement tab : tabTitle){
+    			String title = tab.getText();
+    		
+    			if(title.equalsIgnoreCase(jumpToTab)){
+    				tab.click();
+    				clicked = true;
+    				break;
+    			}
+    		}
+    		
+    		if(clicked)
+    			break;
+    		
+    		String beforeActionLastTabTitle = getlastTabTitle();
+    		moveElemetnt1ToElement2Position(androidDriver, lastTab(), firstTab());
+    		String afterActionLastTabTitle = getlastTabTitle();
+    		
+    		if(beforeActionLastTabTitle.contentEquals(afterActionLastTabTitle)){
+    			assert false : "The tab you are looking for is not visible";
+    		}
+    	}
+    }
 }
+    

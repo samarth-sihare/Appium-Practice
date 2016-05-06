@@ -37,11 +37,11 @@ public class SettingsScreenPageObject extends CommonFunctions{
 //		PageFactory.initElements(androidDriver, this);
 	}
 
-    public String getStateOfToggleSwitchEnableNotification(){
+    private String getStateOfToggleSwitchEnableNotification(){
     	return toggleSwitch.get(0).getText();
     }
 	
-	public String getStateOfToggleSwitchVibrate(){
+	private String getStateOfToggleSwitchVibrate(){
     	return toggleSwitch.get(1).getText();
     }
 
