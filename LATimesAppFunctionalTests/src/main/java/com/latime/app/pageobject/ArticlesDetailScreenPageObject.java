@@ -101,7 +101,7 @@ public class ArticlesDetailScreenPageObject extends CommonFunctions{
 		emailIcon.click();
 	}
 	
-	public boolean isFreeArticleAvailable(){
+	private boolean isFreeArticleAvailable(){
 		return !subscriptionMeterMessage.getText().contains("You've read 10 of 10 free stories this month");
 	}
 	

@@ -1,13 +1,12 @@
 package com.latime.app.functional.tests;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.FindBy;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
@@ -26,10 +25,8 @@ import com.latime.app.pageobject.SectionFrontPageObject;
 import com.latime.app.pageobject.MenuScreenPageObject;
 import com.latime.app.pageobject.ResetPasswordPageObject;
 import com.latime.app.pageobject.SettingsScreenPageObject;
-import com.latime.app.pageobject.TestPageObject;
 
 import io.appium.java_client.android.AndroidDriver;
-import junit.framework.Assert;
 
 public class LATimesAndroidAppFunctionalTests{
 
@@ -46,16 +43,15 @@ public class LATimesAndroidAppFunctionalTests{
 	private ArticlesDetailScreenPageObject articleDetails;
 	private AppOnboardingScreenPageObject appOnboardingScreen;
 	
-	
 	@Parameters({"device_Name", "device_ServerPort", "platform_Name", "app_Activity", "app_package"})
 	@BeforeMethod(alwaysRun = true)
-	public void testSetUp(String device_Name, String device_ServerPort, String platform_Name, String app_Activity, String app_package) throws InterruptedException, IOException{
+	public void testSetUp(String device_Name, String device_ServerPort, String platform_Name, String app_Activity, String app_package) throws MalformedURLException{
 		
 		DesiredCapabilities capabilities = DesiredCapabilities.android();
 		capabilities.setCapability("deviceName", device_Name);
 		capabilities.setCapability("platformName", platform_Name);
 		capabilities.setCapability("appActivity", app_Activity);
-		capabilities.setCapability("app-wait-activity", "com.apptivateme.next.la/com.tribune.universalnews.MainActivity");
+//		capabilities.setCapability("app-wait-activity", "com.apptivateme.next.la/com.tribune.universalnews.MainActivity");
 		capabilities.setCapability("appPackage", app_package);
 		capabilities.setCapability("unicodeKeyboard", "true");
 		capabilities.setCapability("resetKeyboard", "true");
@@ -73,7 +69,7 @@ public class LATimesAndroidAppFunctionalTests{
 		appOnboardingScreen = new AppOnboardingScreenPageObject(driver);
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		
+
 	}
 	
 	
@@ -86,29 +82,25 @@ public class LATimesAndroidAppFunctionalTests{
 	@Test(enabled = false)
 	public void verifySwipeThroughTabsInSectionFront_ForRigthTab() throws InterruptedException{
 		
-		while (sectionFront.getlastTabIndex() != sectionFront.getSelectedTabTitleIndex()){
-			String befoerActionSelectedTab = sectionFront.getSelectedTabTitle();
-			sectionFront.swipeRightToLeftPortraitMode(driver);
-			String afterActionSelectedTab = sectionFront.getSelectedTabTitle();
-		
-			//Assertion
-			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "Page was not swipped as expected";
-		}
+		sectionFront.checkSwipeSectionFrontToLastTab();
 	}
 	
-	//Verify if user is able to Jump through tabs in Section front
-	@Test(enabled = false)
+	//Verify if user is able to jump to intended tab in section front
+	@Test(enabled = true)
+	public void jumpToTabByName() throws InterruptedException{
+		String tabToJump = "saved ";
+		
+		sectionFront.findAndClickTabWithTitle(tabToJump);
+		//Assertion
+		assert sectionFront.getSelectedTabTitle().equalsIgnoreCase(tabToJump) : "User is unable to jump to section '" + tabToJump + "' as expected";
+		
+	}
+	
+	//Verify if user is able to Jump through tabs one by one in Section front
+	@Test(enabled = true)
 	public void verifyJumpThroughTabsInSectionFront() throws InterruptedException{
 		
-		while (sectionFront.getlastTabIndex() != sectionFront.getSelectedTabTitleIndex()){
-			String befoerActionSelectedTab = sectionFront.getSelectedTabTitle();
-		
-			sectionFront.clickTabNextToSelectedTab();
-			String afterActionSelectedTab = sectionFront.getSelectedTabTitle();
-		
-			//Assertion
-			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "User is unable to jump sections as expected";
-		}
+		sectionFront.checkJumpSectionFrontToLastTab();
 	}
 	
 	//Verify if user is able to follow the article topic 
