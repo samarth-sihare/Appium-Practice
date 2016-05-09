@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.latime.app.utilities.AndroidTouchScreenGestures;
 
@@ -134,8 +136,12 @@ public abstract class CommonFunctions extends AndroidTouchScreenGestures {
     	gmailShareIcon.click();
     }
 
-    public String  getPhoneDialerScreenText(){
+    public String getPhoneDialerScreenText(){
     	return phoneDialerScreen.getText();
+    }
+    
+    public <T> T waitUntil(ExpectedCondition<T> condition, int time){
+        return new WebDriverWait(androidDriver, time).until(condition);
     }
 
 }

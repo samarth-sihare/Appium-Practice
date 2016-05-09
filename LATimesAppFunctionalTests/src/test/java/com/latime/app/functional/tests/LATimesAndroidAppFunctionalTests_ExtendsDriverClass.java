@@ -194,8 +194,7 @@ public class LATimesAndroidAppFunctionalTests_ExtendsDriverClass extends CreateA
 		//Assertion
 		assert accountsScreen.getLoginIdText().contentEquals(userName) : "Expected user ID text was: " + userName + "\nActual user ID text was: " + accountsScreen.getLoginIdText();
 
-		accountsScreen.clickLogOutBtn();
-		accountsScreen.clickPopUpLogOutBtn();
+		accountsScreen.logOut();
 	}
 	
 	
