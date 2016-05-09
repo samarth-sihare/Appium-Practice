@@ -78,6 +78,5 @@ public class AccountLoginScreenPageObject{
     public void clickRegisterBtn(){
     	registerBtn.click();
     }
-    
-    
+
 }

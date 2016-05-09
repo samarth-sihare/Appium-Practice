@@ -10,8 +10,6 @@ import io.appium.java_client.NetworkConnectionSetting;
 
 public class FrameworkUtilities {
 	
-	static NetworkConnectionSetting networkConnection;
-
 	private static boolean hasInternetAccess() throws MalformedURLException, IOException {
 	
 		HttpURLConnection urlc = (HttpURLConnection) 
@@ -27,6 +25,7 @@ public class FrameworkUtilities {
 	
 	public static void continueIfInternetIsWorking() throws Exception{
 		if(!hasInternetAccess())
+			System.exit(1);
 			throw new Exception("Skipping test(s) because internet is not available.");
 	}
 

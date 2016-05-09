@@ -198,8 +198,7 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion
 		assert accountsScreen.getLoginIdText().contentEquals(userName) : "Expected user ID text was: " + userName + "\nActual user ID text was: " + accountsScreen.getLoginIdText();
 
-		accountsScreen.clickLogOutBtn();
-		accountsScreen.clickPopUpLogOutBtn();
+		accountsScreen.logOut();
 	}
 	
 	
@@ -308,7 +307,7 @@ public class LATimesAndroidAppFunctionalTests{
 		menuScreen.clickMenuItemSettings();
 		
 		//Assertion
-				assert settingsScreen.getTitle().contentEquals(expectedTitle) : "Expected Page title was : " + expectedTitle + "\nActual Page Title was: " + settingsScreen.getTitle();
+		assert settingsScreen.getTitle().contentEquals(expectedTitle) : "Expected Page title was : " + expectedTitle + "\nActual Page Title was: " + settingsScreen.getTitle();
 	}
 	
 
@@ -359,7 +358,7 @@ public class LATimesAndroidAppFunctionalTests{
 		String articleToBeShared = articleDetails.getArticleTitle();
 		
 		articleDetails.shareOnTwitter();
-		//Assertion
+		//Assertion for twitter widget 
 		assert articleDetails.isTwitterWidgetVisible() : "Twitter widget was not visible on clicking Twitter icon";
 		//Assertion for the shared article
 		assert articleToBeShared.contentEquals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
@@ -372,7 +371,7 @@ public class LATimesAndroidAppFunctionalTests{
 		String articleToBeShared = articleDetails.getArticleTitle();
 		
 		articleDetails.shareOnGmail();
-		//Assertion
+		//Assertion for gmail widget 
 		assert articleDetails.isGmailAppVisible() : "Email App was not visible on clicking Gmail icon";
 		//Assertion for the shared article
 		assert articleToBeShared.contentEquals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
@@ -382,8 +381,8 @@ public class LATimesAndroidAppFunctionalTests{
 	@Test(enabled = false)
 	public void verifyShareFunctionalityOnFacebookFromArticleScreenBottom(){
 		sectionFront.clickArticleTitle(0);
-		
 		articleDetails.clickFacebookIcon();
+
 		//Assertion
 		assert articleDetails.isFacebookWidgetVisible() : "Facebook widget was not visible on clicking Facebook icon";
 	}	
@@ -421,7 +420,7 @@ public class LATimesAndroidAppFunctionalTests{
 		menuScreen.clickMenuItemSettings();
 		
 		settingsScreen.turnOffSwitchEnableNotification();
-		
+		//Assertion 
 		assert !settingsScreen.isToggleSwitchVibrateEnabled() : "Toggle Switch Vibrate was expected to be disbaled but is Inabled";
 	}
 	

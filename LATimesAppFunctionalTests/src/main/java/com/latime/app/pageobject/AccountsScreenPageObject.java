@@ -52,11 +52,8 @@ public class AccountsScreenPageObject extends CommonFunctions{
     	return summartTexts.get(0).getText();
     }
     
-    public void clickLogOutBtn(){
+    public void logOut(){
     	logOutLink.click();
-    }
-    
-    public void clickPopUpLogOutBtn(){
     	popUpLogOutBtn.click();
     }
     
