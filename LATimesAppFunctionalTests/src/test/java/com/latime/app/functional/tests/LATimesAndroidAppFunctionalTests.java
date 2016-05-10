@@ -25,6 +25,7 @@ import com.latime.app.pageobject.SectionFrontPageObject;
 import com.latime.app.pageobject.MenuScreenPageObject;
 import com.latime.app.pageobject.ResetPasswordPageObject;
 import com.latime.app.pageobject.SettingsScreenPageObject;
+import com.latime.app.utilities.FrameworkUtilities;
 
 import io.appium.java_client.android.AndroidDriver;
 
@@ -45,7 +46,7 @@ public class LATimesAndroidAppFunctionalTests{
 	
 	@Parameters({"device_Name", "device_ServerPort", "platform_Name", "app_Activity", "app_package"})
 	@BeforeMethod(alwaysRun = true)
-	public void testSetUp(String device_Name, String device_ServerPort, String platform_Name, String app_Activity, String app_package) throws MalformedURLException{
+	public void testSetUp(String device_Name, String device_ServerPort, String platform_Name, String app_Activity, String app_package) throws Exception{
 		
 		DesiredCapabilities capabilities = DesiredCapabilities.android();
 		capabilities.setCapability("deviceName", device_Name);
@@ -56,7 +57,11 @@ public class LATimesAndroidAppFunctionalTests{
 		capabilities.setCapability("unicodeKeyboard", "true");
 		capabilities.setCapability("resetKeyboard", "true");
 		
+//		FrameworkUtilities.continueIfInternetIsWorking();
+		
 		driver = new AndroidDriver<WebElement>(new URL("http://" + FrameworkProperties.APPIUM_ANDROID_SERVER_IP + ":" + device_ServerPort +"/wd/hub"), capabilities);
+		
+		FrameworkUtilities.continueIfWiFiIsConnected(driver);
 		
 		sectionFront = new SectionFrontPageObject(driver);
 		menuScreen = new MenuScreenPageObject(driver);
@@ -69,7 +74,6 @@ public class LATimesAndroidAppFunctionalTests{
 		appOnboardingScreen = new AppOnboardingScreenPageObject(driver);
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
 	}
 	
 	
@@ -133,7 +137,7 @@ public class LATimesAndroidAppFunctionalTests{
 	}
 	
 	//Verify Search Page Back Button functionality
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void verifySearchPageBackBtnFunctionality() throws InterruptedException{
 		sectionFront.clickHeaderSearchBtn();
 		sectionFront.clickPageBackBtn();
