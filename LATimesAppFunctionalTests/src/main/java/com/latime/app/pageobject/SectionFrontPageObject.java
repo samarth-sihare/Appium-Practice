@@ -3,10 +3,13 @@ package com.latime.app.pageobject;
 import java.util.List;
 
 import org.assertj.core.api.AssertDelegateTarget;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.latime.app.utilities.AndroidTouchScreenGestures;
 
@@ -14,13 +17,17 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 public class SectionFrontPageObject extends CommonFunctions{
 	
 	
     AndroidDriver<WebElement> androidDriver;
     
-    private String befoerActionSelectedTab;
-    private String afterActionSelectedTab;
+    By headerLogo = By.id("toolbar_logo");
+    
+//  @FindAll({@FindBy(id = "toolbar_logo")})
+//  private List<WebElement> headerLogo;
     
     @FindBy(className = "android.widget.ImageButton")
     private WebElement headerMenuBtn;
@@ -40,9 +47,6 @@ public class SectionFrontPageObject extends CommonFunctions{
     @FindAll({@FindBy(id = "cell_button_save")})
     private List<WebElement> articleCellBookMarkBtn;
     
-    @FindAll({@FindBy(id = "toolbar_logo")})
-    private List<WebElement> headerLogo;
-
     @FindAll({@FindBy(id = "tv_no_saved_message")})
     private List<WebElement> noSavedMessages;
     
@@ -85,14 +89,17 @@ public class SectionFrontPageObject extends CommonFunctions{
     	return tabTitle.get(0);
     }
     
-    
 	public boolean isHeaderLogoDisplayed(){
-		return headerLogo.size() != 0;
+		try{
+			return androidDriver.findElement(headerLogo).isDisplayed();
+		}
+		catch(NoSuchElementException e){
+			return false;
+		}
 	}
 	
 	public void waitForPageHeaderLogo() throws InterruptedException{
-		while(!isHeaderLogoDisplayed())
-			Thread.sleep(500);
+		waitUntil(ExpectedConditions.presenceOfElementLocated(headerLogo), 15);
 	}
 	
     public void clickHeaderMenuBtn() throws InterruptedException{
@@ -129,7 +136,7 @@ public class SectionFrontPageObject extends CommonFunctions{
     }
     
     
-    private int getSelectedTabTitleIndex() throws InterruptedException{
+    public int getSelectedTabTitleIndex() throws InterruptedException{
     	Thread.sleep(1000);
     	int index = 0;
     	for (WebElement tab : tabTitle){
