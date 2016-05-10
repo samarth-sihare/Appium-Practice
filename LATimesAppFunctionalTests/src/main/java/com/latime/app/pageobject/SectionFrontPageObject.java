@@ -228,10 +228,10 @@ public class SectionFrontPageObject extends CommonFunctions{
     public void checkSwipeSectionFrontToLastTab() throws InterruptedException{
     	while (getlastTabIndex() != getSelectedTabTitleIndex()){
 			String befoerActionSelectedTab = getSelectedTabTitle();
-			swipeRightToLeftPortraitMode(androidDriver);
+			swipeRightToLeftAt70PercentFromTop(androidDriver);
 			String afterActionSelectedTab = getSelectedTabTitle();
 			
-			assert (befoerActionSelectedTab ==  afterActionSelectedTab) : "Page was not swipped as expected"; 
+			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "Page was not swipped as expected"; 
 			
     	}
     }

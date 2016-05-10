@@ -137,7 +137,7 @@ public class LATimesAndroidAppFunctionalTests{
 	}
 	
 	//Verify Search Page Back Button functionality
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void verifySearchPageBackBtnFunctionality() throws InterruptedException{
 		sectionFront.clickHeaderSearchBtn();
 		sectionFront.clickPageBackBtn();
@@ -316,12 +316,12 @@ public class LATimesAndroidAppFunctionalTests{
 	
 
 	//Verify if user is able to swipe articles in articles details page
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void verifySwipeThroughArticles() throws InterruptedException{
 		sectionFront.clickArticleTitle(0);
 		
 		String articleBeforeAction = articleDetails.getArticleTitle();
-		articleDetails.swipeRightToLeftPortraitMode(driver);
+		articleDetails.swipeRightToLeftAt70PercentFromTop(driver);
 		String articleAfterAction = articleDetails.getArticleTitle();
 		//Assertion
 		assert (articleBeforeAction != articleAfterAction) : "Page was not swipped as expected";

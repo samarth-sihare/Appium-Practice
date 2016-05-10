@@ -76,7 +76,7 @@ public class LATimesAndroidAppFunctionalTests_ExtendsDriverClass extends CreateA
 	public void verifySwipeThroughTabsInMainScreen_ForRigthTab() throws InterruptedException{
 		int initialSelectedTab = sectionFront.getSelectedTabTitleIndex();
 
-		sectionFront.swipeRightToLeftPortraitMode(driver);
+		sectionFront.swipeRightToLeftAt70PercentFromTop(driver);
 		int afterActionSelectedTab = sectionFront.getSelectedTabTitleIndex();
 		
 		//Assertion
@@ -88,11 +88,11 @@ public class LATimesAndroidAppFunctionalTests_ExtendsDriverClass extends CreateA
 	public void verifySwipeThroughTabsInMainScreen_ForLeftTab() throws InterruptedException{
 		//Verify if selected tab is first
 		if(sectionFront.getSelectedTabTitleIndex() == 0)
-			sectionFront.swipeRightToLeftPortraitMode(driver);
+			sectionFront.swipeRightToLeftAt70PercentFromTop(driver);
 		
 		int initialSelectedTab = sectionFront.getSelectedTabTitleIndex();
 		
-		sectionFront.swipeLeftToRightInPortraitMode(driver);
+		sectionFront.swipeLeftToRightAt70PercentFromTop(driver);
 		int afterActionSelectedTab = sectionFront.getSelectedTabTitleIndex();
 		
 		//Assertion
@@ -310,7 +310,7 @@ public class LATimesAndroidAppFunctionalTests_ExtendsDriverClass extends CreateA
 		sectionFront.clickArticleTitle(0);
 		
 		String articleBeforeAction = articleDetails.getArticleTitle();
-		articleDetails.swipeRightToLeftPortraitMode(driver);
+		articleDetails.swipeRightToLeftAt70PercentFromTop(driver);
 		String articleAfterAction = articleDetails.getArticleTitle();
 		//Assertion
 		assert (articleBeforeAction == articleAfterAction) : "Page was not swipped as expected";  
