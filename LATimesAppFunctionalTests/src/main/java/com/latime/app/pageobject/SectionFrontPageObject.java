@@ -231,10 +231,22 @@ public class SectionFrontPageObject extends CommonFunctions{
 			swipeRightToLeftAt70PercentFromTop(androidDriver);
 			String afterActionSelectedTab = getSelectedTabTitle();
 			
-			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "Page was not swipped as expected"; 
+			assert (!befoerActionSelectedTab.equalsIgnoreCase(afterActionSelectedTab)) : "Page was not swipped to right tab as expected"; 
 			
     	}
     }
+    
+    public void checkSwipeSectionFrontToFirstTab() throws InterruptedException{
+    	while (getSelectedTabTitleIndex() != 0 ){
+			String befoerActionSelectedTab = getSelectedTabTitle();
+			swipeLeftToRightAt70PercentFromTop(androidDriver);
+			String afterActionSelectedTab = getSelectedTabTitle();
+			
+			assert (!befoerActionSelectedTab.equalsIgnoreCase(afterActionSelectedTab)) : "Page was not swipped to left tab as expected"; 
+			
+    	}
+    }
+    
     
     public void checkJumpSectionFrontToLastTab() throws InterruptedException{
 		while (getlastTabIndex() != getSelectedTabTitleIndex()){
@@ -244,7 +256,7 @@ public class SectionFrontPageObject extends CommonFunctions{
 			String afterActionSelectedTab = getSelectedTabTitle();
 		
 			//Assertion
-			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "User is unable to jump sections as expected";
+			assert (!befoerActionSelectedTab.equalsIgnoreCase(afterActionSelectedTab)) : "User is unable to jump sections as expected";
 		}
 
     }

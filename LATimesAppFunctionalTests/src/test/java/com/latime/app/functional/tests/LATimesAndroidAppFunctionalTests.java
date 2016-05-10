@@ -87,6 +87,7 @@ public class LATimesAndroidAppFunctionalTests{
 	public void verifySwipeThroughTabsInSectionFront_ForRigthTab() throws InterruptedException{
 		
 		sectionFront.checkSwipeSectionFrontToLastTab();
+		sectionFront.checkSwipeSectionFrontToFirstTab();
 	}
 	
 	//Verify if user is able to jump to intended tab in section front
@@ -171,7 +172,7 @@ public class LATimesAndroidAppFunctionalTests{
 		sectionFront.clickHeaderMenuBtn();
 		menuScreen.clickMenuItemAccount();
 		//Assertion
-		assert accountsScreen.getTitle().contentEquals(expectedTitle) : "Expected Page title was : " + expectedTitle + "\nActual Page Title was: " + accountsScreen.getTitle();
+		assert accountsScreen.getTitle().equals(expectedTitle) : "Expected Page title was : " + expectedTitle + "\nActual Page Title was: " + accountsScreen.getTitle();
 	}
 	
 	//Verify Account Screen back button functionality
@@ -200,7 +201,7 @@ public class LATimesAndroidAppFunctionalTests{
 		accountsLoginScreen.clickLoginBtn();
 		
 		//Assertion
-		assert accountsScreen.getLoginIdText().contentEquals(userName) : "Expected user ID text was: " + userName + "\nActual user ID text was: " + accountsScreen.getLoginIdText();
+		assert accountsScreen.getLoginIdText().equals(userName) : "Expected user ID text was: " + userName + "\nActual user ID text was: " + accountsScreen.getLoginIdText();
 
 		accountsScreen.logOut();
 	}
@@ -216,7 +217,7 @@ public class LATimesAndroidAppFunctionalTests{
 		accountsScreen.clickLogInLink();
 		accountsLoginScreen.clickForgotPasswordLink();
 		//Assertion
-		assert resetPasswordScreen.getTitle().contentEquals(expectedPageTitle) : "Expected Page title was : " + expectedPageTitle + "\nActual Page Title was: " + resetPasswordScreen.getTitle();
+		assert resetPasswordScreen.getTitle().equals(expectedPageTitle) : "Expected Page title was : " + expectedPageTitle + "\nActual Page Title was: " + resetPasswordScreen.getTitle();
 		
 	}
 
@@ -282,9 +283,9 @@ public class LATimesAndroidAppFunctionalTests{
 		assert innitialTag4Title.equals(sectionFront.getTabTitle(3)) : " Tab at Position:Four is not at Position: Four";
 	}
 
-	//Verify Article BookMark functionality for TopNews
+	//Verify Article BookMark functionality for News
 	@Test(enabled = false)
-	public void verifyArticleBookMarkFunctionalityForTopNews() throws InterruptedException{
+	public void verifyArticleBookMarkFunctionalityForNews() throws InterruptedException{
 		int articleIndex = 0;
 		
 		sectionFront.cleanSavedArticles();
@@ -294,11 +295,11 @@ public class LATimesAndroidAppFunctionalTests{
 		sectionFront.clickArticleCellBookMarkBtn(articleIndex);
 		
 		//Assertion for Snack Bar
-		assert sectionFront.getTextFromSnackBar().contentEquals("Article Saved") : "Snack Bar message was not as expected ";
+		assert sectionFront.getTextFromSnackBar().equals("Article Saved") : "Snack Bar message was not as expected ";
 		
 		sectionFront.clickSaveTab();
 		//Assertion
-		assert sectionFront.getNewsArticleCellTitle(0).contentEquals(articleTitle) : "Expected Article to be saved was " + articleTitle + "\nBut was " + sectionFront.getNewsArticleCellTitle(0);
+		assert sectionFront.getNewsArticleCellTitle(0).equals(articleTitle) : "Expected Article to be saved was " + articleTitle + "\nBut was " + sectionFront.getNewsArticleCellTitle(0);
 	}
 
 	
@@ -311,12 +312,12 @@ public class LATimesAndroidAppFunctionalTests{
 		menuScreen.clickMenuItemSettings();
 		
 		//Assertion
-		assert settingsScreen.getTitle().contentEquals(expectedTitle) : "Expected Page title was : " + expectedTitle + "\nActual Page Title was: " + settingsScreen.getTitle();
+		assert settingsScreen.getTitle().equals(expectedTitle) : "Expected Page title was : " + expectedTitle + "\nActual Page Title was: " + settingsScreen.getTitle();
 	}
 	
 
 	//Verify if user is able to swipe articles in articles details page
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void verifySwipeThroughArticles() throws InterruptedException{
 		sectionFront.clickArticleTitle(0);
 		
@@ -324,7 +325,7 @@ public class LATimesAndroidAppFunctionalTests{
 		articleDetails.swipeRightToLeftAt70PercentFromTop(driver);
 		String articleAfterAction = articleDetails.getArticleTitle();
 		//Assertion
-		assert (articleBeforeAction != articleAfterAction) : "Page was not swipped as expected";
+		assert (!articleBeforeAction.equals(articleAfterAction)) : "Page was not swipped as expected";
 	}
 	
 	
@@ -338,12 +339,12 @@ public class LATimesAndroidAppFunctionalTests{
 		articleDetails.clickSaveArticle();
 		
 		//Assertion for Snack Bar
-		assert articleDetails.getTextFromSnackBar().contentEquals("Article Saved") : "Snack Bar message was not as expected ";
+		assert articleDetails.getTextFromSnackBar().equals("Article Saved") : "Snack Bar message was not as expected ";
 		
 		articleDetails.clickPageBackBtn();
 		sectionFront.clickSaveTab();
 		//Assertion for Save Tab
-		assert savedArticleTitle.contentEquals(sectionFront.getNewsArticleCellTitle(0)) : "Saved Article was not found in Saved tab ";
+		assert savedArticleTitle.equals(sectionFront.getNewsArticleCellTitle(0)) : "Saved Article was not found in Saved tab ";
 	}
 	
 	//Verify Share functionality on Facebook from Article Screen
@@ -365,7 +366,7 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion for twitter widget 
 		assert articleDetails.isTwitterWidgetVisible() : "Twitter widget was not visible on clicking Twitter icon";
 		//Assertion for the shared article
-		assert articleToBeShared.contentEquals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
+		assert articleToBeShared.equals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
 	}	
 	
 	//Verify Share functionality on Gmail from Article Screen
@@ -378,7 +379,7 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion for gmail widget 
 		assert articleDetails.isGmailAppVisible() : "Email App was not visible on clicking Gmail icon";
 		//Assertion for the shared article
-		assert articleToBeShared.contentEquals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
+		assert articleToBeShared.equals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
 	}	
 		
 	//Verify Share functionality on Facebook from Article Screen Bottom
@@ -401,7 +402,7 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion
 		assert articleDetails.isTwitterWidgetVisible() : "Twitter widget was not visible on clicking Twitter icon";
 		//Assertion for the shared article
-		assert articleToBeShared.contentEquals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
+		assert articleToBeShared.equals(articleDetails.getTwitterWidgetSharedTitle()) : "Shared text doesnot have the actual article title";
 	}	
 	
 	//Verify Share functionality on Gmail from Article Screen Bottom
@@ -414,7 +415,7 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion
 		assert articleDetails.isGmailAppVisible() : "Gmail App was not visible on clicking Email icon";
 		//Assertion for the shared article
-		assert articleToBeShared.contentEquals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
+		assert articleToBeShared.equals(articleDetails.getGmailAppSubjectSharedTitle()) : "Shared text doesnot have the actual article title";
 	}	
 	
 	//Verify if Vibrate switch is disabled on turning EnableNotifications Switch to OFF
@@ -450,9 +451,9 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion Gmail App Visible
 		assert articleDetails.isGmailAppVisible() : "Gmail App was not visible on clicking Email icon";
 		//Assertion for the 'To' 
-		assert settingsScreen.getGmailAppToTextBoxText().contentEquals("<mobile@latimes.com>, ") : "'TO' email address is not as expected " ;
+		assert settingsScreen.getGmailAppToTextBoxText().equals("<mobile@latimes.com>, ") : "'TO' email address is not as expected " ;
 		//Assertion for subject line
-		assert articleDetails.getGmailAppSubjectLineText().contentEquals("App support") : "Shared text doesnot have the actual article title";
+		assert articleDetails.getGmailAppSubjectLineText().equals("App support") : "Shared text doesnot have the actual article title";
 	}
 	
 	//Verify if user is able to contact support using Phone link in settings page
@@ -464,7 +465,7 @@ public class LATimesAndroidAppFunctionalTests{
 		//Assertion is phone call App was invoked 
 		assert settingsScreen.isPhoneCallAppVisible() : "Phone Call app was not loaded on clicking the Phone line";
 		//Assertion is dialer screen is pre-filled with expected number
-		assert settingsScreen.getPhoneDialerScreenText().contentEquals("8002529141") : "Expected phone number was not pre-filled in phone dialer screen";
+		assert settingsScreen.getPhoneDialerScreenText().equals("8002529141") : "Expected phone number was not pre-filled in phone dialer screen";
 	}
 	
 	//Verify if download starts on clicking Offline Reading menu option 
@@ -500,7 +501,7 @@ public class LATimesAndroidAppFunctionalTests{
 		
 		//Assertion for SectionFront if user is on TOP NEWS on section front
 		appOnboardingScreen.clickNextBtn();
-		assert sectionFront.getSelectedTabTitle().contentEquals("Top News") : "User is not on TOP NEWS section front on app launch" ;
+		assert sectionFront.getSelectedTabTitle().equals("Top News") : "User is not on TOP NEWS section front on app launch" ;
 						
 	}
 
