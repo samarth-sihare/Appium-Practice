@@ -511,7 +511,6 @@ public class LATimesAndroidAppFunctionalTests{
 		menuScreen.clickMenuItemEditSection();
 		System.out.println(driver.getPageSource());
 //		System.out.println(editSectionScreen.unCheckedSeeBtnList2().size());
-		System.out.println(editSectionScreen.toGetContentsInListView());
 		
 		
 	}
