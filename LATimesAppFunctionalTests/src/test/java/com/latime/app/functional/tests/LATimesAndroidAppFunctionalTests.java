@@ -190,8 +190,8 @@ public class LATimesAndroidAppFunctionalTests{
 	@Test(enabled = false)
 	public void verifyIfUserIsAbleLoginWithValidCredentials() throws InterruptedException{
 		
-		String userName = "janhavin@bitwiseglobal.com";
-		String password = "tribune1";
+		String userName = "abc@mail.com";
+		String password = "pass";
 
 		sectionFront.clickHeaderMenuBtn();
 		menuScreen.clickMenuItemAccount();
@@ -503,6 +503,17 @@ public class LATimesAndroidAppFunctionalTests{
 		appOnboardingScreen.clickNextBtn();
 		assert sectionFront.getSelectedTabTitle().equals("Top News") : "User is not on TOP NEWS section front on app launch" ;
 						
+	}
+	
+	@Test(enabled = true)
+	public void test(){
+		sectionFront.clickHeaderMenuBtn();
+		menuScreen.clickMenuItemEditSection();
+		System.out.println(driver.getPageSource());
+//		System.out.println(editSectionScreen.unCheckedSeeBtnList2().size());
+		System.out.println(editSectionScreen.toGetContentsInListView());
+		
+		
 	}
 
 }
