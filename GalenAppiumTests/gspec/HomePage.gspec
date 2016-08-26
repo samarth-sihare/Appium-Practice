@@ -1,0 +1,13 @@
+# ------- BitWise "Home" page spec -------
+# Author: Samarth Sihare
+# Created on: 21/09/2015
+# History: Initial Draft
+
+@objects
+	loginbtn	xpath		//*[@id="welcome-page"]/p[3]/button
+		
+= Main Area Home Page =
+
+	@on tablet_landscape
+		loginbtn:
+			height 45 px		

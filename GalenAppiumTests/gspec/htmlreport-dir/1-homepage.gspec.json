@@ -1,0 +1,47 @@
+{
+  "testId" : "1-homepage.gspec",
+  "name" : "HomePage.gspec",
+  "report" : {
+    "nodes" : [ {
+      "name" : "Simple check",
+      "status" : "info",
+      "nodes" : [ {
+        "name" : "check  HomePage.gspec --url http://testapp.galenframework.com --size 1024x786 --include tablet_landscape --htmlreport htmlreport-dir",
+        "status" : "info",
+        "nodes" : [ {
+          "name" : "Check layout: HomePage.gspec included tags: tablet_landscape",
+          "status" : "error",
+          "time" : 1459257245621,
+          "includedTags" : [ "tablet_landscape" ],
+          "sections" : [ {
+            "name" : "Main Area Home Page",
+            "objects" : [ {
+              "name" : "loginbtn",
+              "specs" : [ {
+                "status" : "error",
+                "place" : {
+                  "filePath" : "HomePage.gspec",
+                  "lineNumber" : 13
+                },
+                "name" : "height 45 px",
+                "errors" : [ "\"loginbtn\" height is 46px instead of 45px" ],
+                "highlight" : [ "loginbtn" ]
+              } ]
+            } ]
+          } ],
+          "objects" : {
+            "loginbtn" : {
+              "area" : [ 97, 391, 78, 46 ]
+            }
+          },
+          "screenshot" : "layout-1-screenshot.png",
+          "type" : "layout"
+        } ],
+        "time" : 1459257237353,
+        "type" : "node"
+      } ],
+      "time" : 1459257208353,
+      "type" : "node"
+    } ]
+  }
+}

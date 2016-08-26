@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TribuneQA-Test-Automation-Suite" >
+	
+<!-- 	<test name="SamsungGalaxyS5PortraitTests">
+		
+		<parameter name="device_Name" value="Samsung Galaxy S5 (Portrait)"/>
+		<parameter name="browser_Name" value="Chrome"/>
+		<parameter name="platform_Name" value="Android"/>
+		<parameter name="bundle_ID" value="com.android.chrome"/>
+		<parameter name="orientation" value="PORTRAIT"/>
+		<parameter name="tags" value="mobile_portrait"/>
+		
+		
+		<classes>
+			<class name="com.tribuneqa.layout.tests.LATimesSubscriptionPagesAndroidLayoutTestSuite"/>
+ 		</classes>
+ 		
+	</test> -->
+	
+<!-- 	<test name="SamsungGalaxyS5LandscapeTests">
+		
+		<parameter name="device_Name" value="Samsung Galaxy S5 (Landscape)"/>
+		<parameter name="browser_Name" value="Chrome"/>
+		<parameter name="platform_Name" value="Android"/>
+		<parameter name="bundle_ID" value="com.android.chrome"/>
+		<parameter name="orientation" value="LANDSCAPE"/>
+		<parameter name="tags" value="mobile_landscape"/>
+		
+		
+		<classes>
+			<class name="com.tribuneqa.layout.tests.LATimesSubscriptionPagesAndroidLayoutTestSuite"/>
+ 		</classes>
+ 		
+	</test> -->
+	
+<!-- 	<test name="AppleIpad3PortraitTests">
+		
+		<parameter name="device_Name" value="iPad 3 (Portrait)"/>
+		<parameter name="browser_Name" value="safari"/>
+		<parameter name="platform_Name" value="iOS"/>
+		<parameter name="bundle_ID" value="com.github.samarth.SafariLauncher"/>
+		<parameter name="orientation" value="PORTRAIT"/>
+		<parameter name="tags" value="tablet_portrait"/>
+		<parameter name="iPadUDID" value="79dfb751-ec35-4c2f-9176-47d625a04f1d"/> 
+		<parameter name="iPadUDID" value="3fd04e569afeab3bc803d3c9489f75cdbd03419d"/>
+		
+		<classes>
+			<class name="com.tribuneqa.layout.tests.LATimesSubscriptionPagesIOSLayoutTestSuite"/>
+ 		</classes>
+ 		
+	</test> -->
+	
+	<test name="AppleIpad3LandscapeTests">
+		
+		<parameter name="device_Name" value="iPad 3 (Landscape)"/>
+		<parameter name="browser_Name" value="safari"/>
+		<parameter name="platform_Name" value="iOS"/>
+		<parameter name="bundle_ID" value="com.github.samarth.SafariLauncher"/>
+		<parameter name="orientation" value="LANDSCAPE"/>
+		<parameter name="tags" value="tablet_landscape"/>
+		<parameter name="iPadUDID" value="3fd04e569afeab3bc803d3c9489f75cdbd03419d"/>
+		
+		<classes>
+			<class name="com.tribuneqa.layout.tests.LATimesSubscriptionPagesIOSLayoutTestSuite"/>
+ 		</classes>
+ 		
+	</test> 
+	
+	
+</suite>

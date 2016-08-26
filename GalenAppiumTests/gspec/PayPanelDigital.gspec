@@ -1,0 +1,539 @@
+# ------- latimese.com "Pay Panel Digital" page spec -------
+# Site Under Test: http://www.latimes.com/
+# Author: Samarth Sihare
+# Created on: 18/11/2015
+# History: Initial Draft
+
+@objects
+	
+	#Header Section
+	header										xpath		/html/body/div[1]/div[3]/div[1]/div[1]
+	logo										xpath		/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/img
+	header-title								xpath		/html/body/div[1]/div[3]/div[1]/div[1]/div[2]/h2[1]
+	header-subtext								xpath		/html/body/div[1]/div[3]/div[1]/div[1]/div[2]/h4
+	
+	#Plan Section
+	plan-container								xpath		/html/body/div[1]/div[3]/div[1]/div[2]
+	
+	#Details Section
+	#Digital Access
+	digital-access-box							id			digitalAccess
+	digital-access-box-title-box				xpath		//*[@id="digitalAccess"]/div[1]
+	digital-access-box-number					xpath		//*[@id="digitalAccess"]/div[1]/span[1]
+	digital-access-box-title-text				xpath		//*[@id="digitalAccess"]/div[1]/div/span[1]
+	digital-access-box-text						xpath		//*[@id="digitalAccess"]/div[2]/div/div[1]/p
+	digital-access-box-email-textBox			xpath		//*[@id="digitalAccess"]/div[2]/div/div[1]/input
+	digital-access-box-ContinueBtn				xpath		//*[@id="digitalAccess"]/div[2]/div/a
+	
+	#Payment
+	payment-box									id			payment
+	payment-box-number							xpath		//*[@id="payment"]/div[1]/span[1]
+	payment-box-text							xpath		//*[@id="payment"]/div[1]/div/span[1]
+	
+	#Address
+	address-box									id			address
+	address-box-number							xpath		//*[@id="address"]/div[1]/span[1]
+	address-box-text							xpath		//*[@id="address"]/div[1]/div/span[1]
+	
+	#Place Order
+	place-order-box								id			placeOrder
+	place-order-box-number						xpath		//*[@id="placeOrder"]/div[1]/span[1]
+	place-order-box-text						xpath		//*[@id="placeOrder"]/div[1]/div/span[1]
+	
+	#Terms and Conditions
+	terms-and-conditions						xpath		/html/body/div[1]/div[3]/div[1]/div[4]
+	
+= Pay Panel - Digital =
+	@on *
+		#Header Section
+		header:
+			width 100% of screen/width
+		
+		logo:
+			centered horizontally inside header
+		
+		header-title:
+			text is "Unlimited Digital Access,"
+			css font-family contains "Belizio"
+			css color is "rgba(19, 19, 19, 1)"
+			centered horizontally inside header
+		
+	    header-subtext:
+			centered horizontally inside header
+			text is "Choose the plan that's best for you"
+			css font-family contains "Arial"
+			css color is "rgba(102, 102, 102, 1)"
+			
+		#Plan Section		
+		plan-container:
+			centered horizontally inside screen
+
+		#Details Section
+	    #Digital Access		
+		digital-access-box:
+			centered horizontally inside screen
+			width 93 to 100% of plan-container/width
+		
+		digital-access-box-title-box:
+			css background-color is "rgba(41, 174, 230, 1)"
+			
+        digital-access-box-number:
+			text is "1"
+			css font-family contains "Arial"
+			css color is "rgba(41, 174, 230, 1)"
+			
+        digital-access-box-title-text:
+			text is "Digital Access: Desktop, Tablet, and Mobile"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+        digital-access-box-text:
+			text is "Please provide your email address to continue. This will be your user name."
+			css font-family contains "Arial"
+			css color is "rgba(51, 51, 51, 1)"
+			
+		digital-access-box-email-textBox:
+			css background-color is "rgba(220, 219, 219, 1)"
+		
+        digital-access-box-ContinueBtn:
+			text is "Continue"
+			css font-family contains "Arial"
+			css color is "rgba(153, 153, 153, 1)"
+			css background-color is "rgba(204, 204, 204, 1)"
+			
+		#Payment
+		payment-box:
+			css background-color is "rgba(255, 255, 255, 1)"
+			
+		payment-box-number:
+			text is "2"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		payment-box-text:
+			text is "Payment"
+			css font-family contains "Arial"
+			css color is "rgba(51, 51, 51, 1)"
+			
+		#Address
+		address-box:
+			css background-color is "rgba(255, 255, 255, 1)"
+			
+		address-box-number:
+			text is "3"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		address-box-text:
+			text is "Address"
+			css font-family contains "Arial"
+			css color is "rgba(51, 51, 51, 1)"
+			
+		#Place Order
+		place-order-box:
+			css background-color is "rgba(255, 255, 255, 1)"
+			
+		place-order-box-number:
+			text is "4"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		place-order-box-text:
+			text is "Place Order"
+			css font-family contains "Arial"
+			css color is "rgba(51, 51, 51, 1)"
+	
+	
+	@on desktop_regular
+		#Header Section
+		header:
+			height 193 px
+		
+		logo:
+			height 26 px
+			width 199 px
+			inside header 0 px top 
+			
+	    header-title:
+			below logo 50 px 
+			css font-size is "32px"
+		
+	    header-subtext:
+			below header-title 30 px
+			css font-size is "15px"
+	
+		#Plan Section
+		plan-container:
+			height 421 px 
+			width 800 px
+			below header-subtext 30 px
+			
+		#Details Section Common specs
+		payment-box, address-box, place-order-box:
+			height 50 px
+			width 800 px
+			inside screen 225 px left
+		
+		digital-access-box-number, payment-box-number, address-box-number, place-order-box-number:
+			height 28 px
+			width 28 px
+			
+	    #Digital Access
+        digital-access-box:
+			height 221 px 
+			width 800 px
+			below plan-container 15 px
+			inside screen 225 px left
+			
+        digital-access-box-title-box:
+			inside digital-access-box 0 px top
+			height 50 px
+			
+        digital-access-box-number:
+			inside digital-access-box-title-box 9 px top, 13 px bottom, 15 px left
+			
+        digital-access-box-title-text:
+			inside digital-access-box-title-box 15 px top, 16 px bottom
+			near digital-access-box-number 12 px right
+			
+        digital-access-box-text:
+			below digital-access-box-title-box 20 px 
+			inside digital-access-box 75 px left
+			css font-size is "14px"
+				
+        digital-access-box-email-textBox:
+			height 40 px 
+			width 650 px 
+			below digital-access-box-text 14 px 
+			inside digital-access-box 75 px left
+			
+		digital-access-box-ContinueBtn:
+			height 40 px 
+			width 160 px 
+			inside digital-access-box 75 px right, 25 px bottom
+			
+		#Payment
+		payment-box:
+			below digital-access-box 15 px
+			
+		payment-box-number:
+			inside payment-box 9 px top, 13 px bottom, 15 px left
+			
+		payment-box-text:
+			inside payment-box 15 px top, 16 px bottom
+			near payment-box-number 12 px right
+		
+		#Address
+		address-box:
+			below payment-box 15 px
+			
+		address-box-number:
+			inside address-box 9 px top, 13 px bottom, 15 px left
+
+		address-box-text:
+			inside address-box 15 px top, 16 px bottom
+			near address-box-number 12 px right
+			
+	@on tablet_portrait
+		#Header Section
+		header:
+			height 193 px
+		
+		logo:
+			height 26 px
+			width 199 px
+			inside header 0 px top 
+			
+	    header-title:
+			below logo 50 px 
+			css font-size is "32px"
+		
+	    header-subtext:
+			below header-title 30 px
+			css font-size is "15px"
+	
+		#Plan Section
+		plan-container:
+			height 379 px 
+			width 600 px
+			below header-subtext 30 px
+			
+		#Details Section Common specs
+		payment-box, address-box, place-order-box:
+			height 50 px
+			width 600 px
+			inside screen 69 px left
+		
+		digital-access-box-number, payment-box-number, address-box-number, place-order-box-number:
+			height 28 px
+			width 28 px
+			
+	    #Digital Access
+        digital-access-box:
+			height 221 px 
+			width 600 px
+			below plan-container 15 px
+			inside screen 69 px left
+			
+        digital-access-box-title-box:
+			inside digital-access-box 0 px top
+			height 50 px
+			
+        digital-access-box-number:
+			inside digital-access-box-title-box 9 px top, 13 px bottom, 15 px left
+			
+        digital-access-box-title-text:
+			inside digital-access-box-title-box 15 px top, 16 px bottom
+			near digital-access-box-number 12 px right
+			
+        digital-access-box-text:
+			below digital-access-box-title-box 20 px 
+			inside digital-access-box 20 px left
+			css font-size is "14px"
+				
+        digital-access-box-email-textBox:
+			height 40 px 
+			width 560 px 
+			below digital-access-box-text 14 px 
+			inside digital-access-box 20 px left
+			
+		digital-access-box-ContinueBtn:
+			height 40 px 
+			width 160 px 
+			inside digital-access-box 20 px right, 25 px bottom
+			
+		#Payment
+		payment-box:
+			below digital-access-box 15 px
+			
+		payment-box-number:
+			inside payment-box 9 px top, 13 px bottom, 15 px left
+			
+		payment-box-text:
+			inside payment-box 15 px top, 16 px bottom
+			near payment-box-number 12 px right
+		
+		#Address
+		address-box:
+			below payment-box 15 px
+			
+		address-box-number:
+			inside address-box 9 px top, 13 px bottom, 15 px left
+
+		address-box-text:
+			inside address-box 15 px top, 16 px bottom
+			near address-box-number 12 px right
+			
+		#Place Order
+		place-order-box:
+			below address-box 15 px
+			
+		place-order-box-number:
+			inside place-order-box 9 px top, 13 px bottom, 15 px left
+			
+		place-order-box-text:
+			inside place-order-box 15 px top, 16 px bottom
+			near place-order-box-number 12 px right
+			
+	@on tablet_landscape
+		#Header Section
+		header:
+			height 250 px
+		
+		logo:
+			height 26 px
+			width 199 px
+			inside header 0 px top 
+			
+	    header-title:
+			below logo ~50 px 
+			css font-size is "32px"
+		
+	    header-subtext:
+			below header-title 88 px
+			css font-size is "15px"
+	
+		#Plan Section
+		plan-container:
+			height 389 px 
+			width 800 px
+			below header-subtext 50 px
+			
+		#Details Section Common specs
+		payment-box, address-box, place-order-box:
+			height 50 px
+			width 800 px
+			inside screen 106 px left
+		
+		digital-access-box-number, payment-box-number, address-box-number, place-order-box-number:
+			height 28 px
+			width 28 px
+			
+	    #Digital Access
+        digital-access-box:
+			height 221 px 
+			width 800 px
+			below plan-container 20 px
+			inside screen 106 px left
+			
+        digital-access-box-title-box:
+			inside digital-access-box 0 px top
+			height 50 px
+			
+        digital-access-box-number:
+			inside digital-access-box-title-box 9 px top, 13 px bottom, 15 px left
+			
+        digital-access-box-title-text:
+			inside digital-access-box-title-box 15 px top, 16 px bottom
+			near digital-access-box-number 12 px right
+			
+        digital-access-box-text:
+			below digital-access-box-title-box 20 px 
+			inside digital-access-box 75 px left
+			css font-size is "14px"
+				
+        digital-access-box-email-textBox:
+			height 40 px 
+			width 650 px 
+			below digital-access-box-text 14 px 
+			inside digital-access-box 75 px left
+			
+		digital-access-box-ContinueBtn:
+			height 40 px 
+			width 160 px 
+			inside digital-access-box 75 px right, 25 px bottom
+			
+		#Payment
+		payment-box:
+			below digital-access-box 15 px
+			
+		payment-box-number:
+			inside payment-box 9 px top, 13 px bottom, 15 px left
+			
+		payment-box-text:
+			inside payment-box 15 px top, 16 px bottom
+			near payment-box-number 12 px right
+		
+		#Address
+		address-box:
+			below payment-box 15 px
+			
+		address-box-number:
+			inside address-box 9 px top, 13 px bottom, 15 px left
+
+		address-box-text:
+			inside address-box 15 px top, 16 px bottom
+			near address-box-number 12 px right
+			
+		#Place Order
+		place-order-box:
+			below address-box 15 px
+			
+		place-order-box-number:
+			inside place-order-box 9 px top, 13 px bottom, 15 px left
+			
+		place-order-box-text:
+			inside place-order-box 15 px top, 16 px bottom
+			near place-order-box-number 12 px right
+			
+	@on mobile_portrait
+		#Header Section
+		header:
+			height 326 px
+		
+		logo:
+			height 26 px
+			width 199 px
+			inside header 0 px top 
+			
+	    header-title:
+			below logo ~50 px 
+			css font-size is "32px"
+		
+	    header-subtext:
+			below header-title 126 px
+			css font-size is "15px"
+	
+		#Plan Section
+		plan-container:
+			height 524 px 
+			width 289 px
+			below header-subtext 50 px
+			
+		#Details Section Common specs
+		payment-box, address-box, place-order-box:
+			height 50 px
+			width 269 px
+			inside screen 10 px left
+		
+		digital-access-box-number, payment-box-number, address-box-number, place-order-box-number:
+			height 28 px
+			width 28 px
+			
+	    #Digital Access
+        digital-access-box:
+			height 295 px 
+			width 269 px
+			below plan-container 20 px
+			inside screen 10 px left
+			
+        digital-access-box-title-box:
+			inside digital-access-box 0 px top
+			height 90 px
+			
+        digital-access-box-number:
+			inside digital-access-box-title-box 18 px top, 44 px bottom, 15 px left
+			
+        digital-access-box-title-text:
+			inside digital-access-box-title-box 16 px top, 15 px bottom
+			near digital-access-box-number 12 px right
+			
+        digital-access-box-text:
+			below digital-access-box-title-box 20 px 
+			inside digital-access-box 20 px left
+			css font-size is "14px"
+				
+        digital-access-box-email-textBox:
+			height 40 px 
+			width 229 px 
+			below digital-access-box-text 14 px 
+			inside digital-access-box 20 px left
+			
+		digital-access-box-ContinueBtn:
+			height 40 px 
+			width 183 px 
+			inside digital-access-box 43 px right, 25 px bottom
+			
+		#Payment
+		payment-box:
+			below digital-access-box 15 px
+			
+		payment-box-number:
+			inside payment-box 9 px top, 13 px bottom, 15 px left
+			
+		payment-box-text:
+			inside payment-box 16 px top, 15 px bottom
+			near payment-box-number 12 px right
+		
+		#Address
+		address-box:
+			below payment-box 15 px
+			
+		address-box-number:
+			inside address-box 9 px top, 13 px bottom, 15 px left
+
+		address-box-text:
+			inside address-box 16 px top, 15 px bottom
+			near address-box-number 12 px right
+			
+		#Place Order
+		place-order-box:
+			below address-box 15 px
+			
+		place-order-box-number:
+			inside place-order-box 9 px top, 13 px bottom, 15 px left
+			
+		place-order-box-text:
+			inside place-order-box 16 px top, 15 px bottom
+			near place-order-box-number 12 px right
+		
