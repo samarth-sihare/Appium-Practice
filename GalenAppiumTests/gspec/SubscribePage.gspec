@@ -1,0 +1,422 @@
+# ------- latimese.com "Subscribe" page spec -------
+# Site Under Test: http://www.latimes.com/
+# Author: Samarth Sihare
+# Created on: 17/11/2015
+# History: Initial Draft
+
+@objects
+	
+	#Header Elements
+	header										xpath			//*[@id="form1"]/div[3]
+	logo										xpath			//*[@id="form1"]/div[3]/div/header/div[1]/a/img
+	already-a-print-subscriber-text				xpath			//*[@id="form1"]/div[3]/div/header/div[2]/div
+	header-click-here-link						xpath			//*[@id="form1"]/div[3]/div/header/div[2]/div/a
+	
+	#Main Section elements
+	main-section								id				container
+	main-title									xpath			//*[@id="templateContainer"]/div/div[1]/h1/span/b
+	main-subtitle								xpath			//*[@id="templateContainer"]/div/div[1]/p/span
+	
+	printDigital-left-box						xpath			//*[@id="templateContainer"]/div/div[2]/div[1]/div/ul/li[2]/a
+	
+	#Bottom Image Section
+	bottom-image-section						id				carousel-example-generic
+	bottom-image-top-title						xpath			//*[@id="carousel-example-generic"]/h3
+	bottom-image								xpath			//*[@id="carousel-example-generic"]/div/div/img
+	bottom-image-bottom-title					xpath			//*[@id="carousel-example-generic"]/div/div/div/h3
+	bottom-image-bottom-text					xpath			//*[@id="carousel-example-generic"]/div/div/div/p
+	
+	
+	
+= Subscribe Page =
+	
+	@on *
+		# Header Section
+		header:
+			width 91 to 100% of screen/width
+			css background-color is "rgba(19, 19, 19, 1)"
+			
+		already-a-print-subscriber-text:
+			text is "Already a print subscriber? Click Here."
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		header-click-here-link:
+			text is "Click Here"
+			css font-family contains "Arial"
+			css color is "rgba(69, 144, 188, 1)"
+			
+		# Main Section
+		main-title:
+			text is "Subscribe to the LA Times"
+			css font-family contains "Belizio"
+			css color is "rgba(19, 19, 19, 1)"
+			
+	    main-subtitle:
+			text is "Choose your subscription below and start reading today."
+			css font-family contains "Arial"
+			css color is "rgba(19, 19, 19, 1)"
+		
+		main-section:
+			css background-color is "rgba(0, 0, 0, 0)"
+
+		#Bottom Image Section
+		bottom-image-top-title:
+			inside bottom-image-section 0 px top left right
+			text is "What you may not know about the Los Angeles Times..."
+			css font-family contains "Belizio"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		bottom-image-bottom-title:
+			text is "For the Community and the Environment"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		bottom-image:
+			below bottom-image-top-title ~0 px
+			inside partly bottom-image-section ~0 px bottom left
+		
+		bottom-image-bottom-text:
+			text is "An industry leader in recycling; 73% of the newsprint has a recycled fiber content of at least 50% and no trees are harvested specifically to make newsprint."
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+		
+		
+	@on desktop_regular
+		# Header Section
+		header:
+			height 50 px
+		
+		logo:
+			height 30 px
+			width 300 px
+			inside header 10 px top, 10 px bottom, 55 px left
+			
+		already-a-print-subscriber-text:
+			css font-size is "12px"
+			inside header 15 px top, 18 px bottom, 54 px right
+			
+			
+		header-click-here-link:
+			css font-size is "12px"
+			inside header 17 px top, 19 px bottom, 57 px right
+		
+		# Main Section
+		main-section:
+			height 1096 px 
+			width 1170 px
+			below header 30 px
+			
+		main-title:
+			inside main-section 18 px top, 15 px left
+			
+		main-subtitle:
+			inside main-section 15 px left 
+			below main-title 11 px
+			
+		#Bottom Image section
+		bottom-image-section:
+			height 566 px
+			width 1140 px 
+			below printDigital-left-box 40 px
+			inside main-section 15 px left right
+			
+		bottom-image-top-title:
+			height 62 px
+			css font-size is "24px"
+			
+		bottom-image:
+			height	504 px
+			inside partly bottom-image-section 62 px top
+	
+		bottom-image-bottom-title:
+			inside bottom-image-section 40 px left, 45 px bottom
+			css font-size is "21px"
+		
+		bottom-image-bottom-text:
+			below bottom-image-bottom-title 5 px 
+			inside bottom-image-section 40 px left
+			css font-size is "14px"
+		
+	@on desktop_wide
+		# Header Section
+		header:
+			height 50 px
+		
+		logo:
+			height 30 px
+			width 300 px
+			inside header 10 px top, 10 px bottom, 97 px left
+			
+		already-a-print-subscriber-text:
+			css font-size is "12px"
+			inside header 15 px top, 18 px bottom, 96 px right
+			
+			
+		header-click-here-link:
+			css font-size is "12px"
+			inside header 17 px top, 19 px bottom, 99 px right
+	
+		# Main Section
+		main-section:
+			height 1096 px 
+			width 1170 px
+			below header 30 px
+			
+		main-title:
+			inside main-section 18 px top, 15 px left
+			
+		main-subtitle:
+			inside main-section 15 px left 
+			below main-title 11 px
+			
+		#Bottom Image section
+		bottom-image-section:
+			height 566 px
+			width 1140 px 
+			below printDigital-left-box 40 px
+			inside main-section 15 px left right
+			
+		bottom-image-top-title:
+			height 62 px
+			css font-size is "24px"
+			
+		bottom-image:
+			height	504 px
+			inside partly bottom-image-section 62 px top
+	
+		bottom-image-bottom-title:
+			inside bottom-image-section 40 px left, 45 px bottom
+			css font-size is "21px"
+		
+		bottom-image-bottom-text:
+			below bottom-image-bottom-title 5 px 
+			inside bottom-image-section 40 px left
+			css font-size is "14px"
+			
+	@on tablet_portrait
+		# Header Section
+		header:
+			height 50 px
+			width 768 px
+			
+		logo:
+			height 30 px
+			width 300 px
+			inside header 10 px top, 10 px bottom, 15 px left
+			
+		already-a-print-subscriber-text:
+			css font-size is "12px"
+			inside header 15 px top, 18 px bottom, 15 px right
+			
+			
+		header-click-here-link:
+			css font-size is "12px"
+			inside header 17 px top, 19 px bottom, 18 px right
+	
+		# Main Section
+		main-section:
+			height 1219 px 
+			width 737 px
+			below header 30 px
+			
+		main-title:
+			inside main-section 18 px top, 15 px left
+			
+		main-subtitle:
+			inside main-section 15 px left 
+			below main-title 11 px
+			
+		#Bottom Image section
+		bottom-image-section:
+			height 560 px
+			width 707 px 
+			below printDigital-left-box 395 px
+			inside partly main-section 15 px left right
+			
+		bottom-image-top-title:
+			height 56 px
+			css font-size is "18px"
+			
+		bottom-image:
+			height	504 px
+			inside partly bottom-image-section 55 px top
+	
+		bottom-image-bottom-title:
+			inside bottom-image-section 40 px left, 66 px bottom
+			css font-size is "21px"
+		
+		bottom-image-bottom-text:
+			below bottom-image-bottom-title 5 px 
+			inside bottom-image-section 40 px left
+			css font-size is "14px"
+			
+	@on tablet_landscape
+		# Header Section
+		header:
+			height 50 px
+			width 1024 px
+		
+		logo:
+			height 30 px
+			width 300 px
+			inside header 10 px top, 10 px bottom, 36 px left
+			
+		already-a-print-subscriber-text:
+			css font-size is "12px"
+			inside header 15 px top, 18 px bottom, 35 px right
+			
+			
+		header-click-here-link:
+			css font-size is "12px"
+			inside header 17 px top, 19 px bottom, 38 px right
+		
+		# Main Section
+		main-section:
+			height 1096 px 
+			width 970 px
+			below header 30 px
+			
+		main-title:
+			inside main-section 18 px top, 15 px left
+			
+		main-subtitle:
+			inside main-section 15 px left 
+			below main-title 11 px
+			
+		#Bottom Image section
+		bottom-image-section:
+			height 566 px
+			width 940 px 
+			below printDigital-left-box 40 px
+			inside main-section 15 px left right
+			
+		bottom-image-top-title:
+			height 62 px
+			css font-size is "24px"
+			
+		bottom-image:
+			height	504 px
+			inside partly bottom-image-section 62 px top
+	
+		bottom-image-bottom-title:
+			inside bottom-image-section 40 px left, 65 px bottom
+			css font-size is "21px"
+		
+		bottom-image-bottom-text:
+			below bottom-image-bottom-title 5 px 
+			inside bottom-image-section 40 px left
+			css font-size is "14px"
+			
+	@on mobile_portrait
+		# Header Section
+		header:
+			height 87 px
+		
+		logo:
+			height 30 px
+			width 300 px
+			inside partly header 10 px top, 47 px bottom, 30 px left
+			
+		already-a-print-subscriber-text:
+			css font-size is "12px"
+			inside header 55 px top, 15 px bottom, 15 px right
+			
+			
+		header-click-here-link:
+			css font-size is "12px"
+			inside header ~56 px top, 17 px bottom, 82 px right
+	
+		# Main Section
+		main-section:
+			height 1430 px 
+			width 360 px
+			below header 0 px
+			
+		main-title:
+			inside main-section 18 px top, 15 px left
+			
+		main-subtitle:
+			inside main-section 15 px left 
+			below main-title 11 px
+			
+		#Bottom Image section
+		bottom-image-section:
+			height 578 px
+			width 330 px 
+			below printDigital-left-box 454 px
+			inside main-section 15 px left right
+			
+		bottom-image-top-title:
+			height 74 px
+			css font-size is "18px"
+			
+		bottom-image:
+			height	504 px
+			inside partly bottom-image-section 74 px top
+	
+		bottom-image-bottom-title:
+			inside bottom-image-section 40 px left, 125 px bottom
+			css font-size is "21px"
+		
+		bottom-image-bottom-text:
+			below bottom-image-bottom-title 5 px 
+			inside bottom-image-section 40 px left
+			css font-size is "14px"
+			
+	@on mobile_landscape
+		# Header Section
+		header:
+			height 87 px
+		
+		logo:
+			height 30 px
+			width 300 px
+			inside partly header 10 px top, 47 px bottom, 75 px left
+			
+		already-a-print-subscriber-text:
+			css font-size is "12px"
+			inside header 55 px top, 15 px bottom, 15 px right
+			
+			
+		header-click-here-link:
+			css font-size is "12px"
+			inside header 57 px top, 16 px bottom, 123 px right
+	
+		# Main Section
+		main-section:
+			height 1388 px 
+			width 449 px
+			below header 0 px
+			
+		main-title:
+			inside main-section 18 px top, 15 px left
+			
+		main-subtitle:
+			inside main-section 15 px left 
+			below main-title 12 px
+			
+		#Bottom Image section
+		bottom-image-section:
+			height 580 px
+			width 419 px 
+			below printDigital-left-box 410 px
+			inside partly main-section 15 px left right
+			
+		bottom-image-top-title:
+			height 76 px
+			css font-size is "18px"
+			
+		bottom-image:
+			height	504 px
+			inside partly bottom-image-section 76 px top
+	
+		bottom-image-bottom-title:
+			inside bottom-image-section 40 px left, 86 px bottom
+			css font-size is "21px"
+		
+		bottom-image-bottom-text:
+			below bottom-image-bottom-title 6 px 
+			inside bottom-image-section 40 px left
+			css font-size is "14px"
+		

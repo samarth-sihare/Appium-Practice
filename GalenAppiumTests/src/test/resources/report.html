@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>Galen Reports</title>
+        <link rel="stylesheet" type="text/css" href="CustomReportResources/report.css"></link>
+        <link rel="stylesheet" type="text/css" href="CustomReportResources/tablesorter.css"></link>
+        <script src="CustomReportResources/jquery-1.11.2.min.js"></script>
+        <script src="CustomReportResources/handlebars-v2.0.0.js"></script>
+        <script src="CustomReportResources/tablesorter.js"></script>
+        <script src="CustomReportResources/galen-report.js"></script>
+		<script id="myJson" type="application/json" src="CustomReportResources/report.json"></script>
+        <script type="text/javascript" src="CustomReportResources/tests.js"></script>
+        <script>
+            $(function () {
+                var galenReport = createGalenTestOverview();
+                galenReport.renderTestsTable("tests-table", reportData);
+                galenReport.renderGroupsTable("groups-table", reportData);
+
+                window.onhashchange = function () {
+                    galenReport.handleHash(window.location.hash.substr(1));
+                };
+
+                galenReport.handleHash(window.location.hash.substr(1));
+            });
+        </script>
+    </head>
+    <body> <div class="tests-overview">
+            <h2>Galen Test Report</h2>
+            <div class="tabs">
+                <a class="tab tab-tests" href="#tests">Tests</a>
+                
+            </div>
+            <div id="tests-table">
+            </div>
+            <div id="groups-table">
+            </div>
+
+            <script id="tests-table-tpl" type="text/x-handlebars-template">
+                <table class="tests tablesorter">
+                    <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>Executed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each tests}}
+                        <tr data-groups="{{groups}}">
+                            <td class="suite-link">
+                                <a href="{{name}}/report.html">{{name}}</a>
+                            </td>
+                            <td class="time">{{formatDateTime executedAt}}</td>
+                            <td class="progressbar">
+                                {{renderProgressBar statistic}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </script>
+            <script id="groups-table-tpl" type="text/x-handlebars-template">
+                <table class="groups tablesorter">
+                    
+                    </tbody>
+                </table>
+            </script>
+        </div>
+    </body>
+</html>

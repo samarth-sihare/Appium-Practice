@@ -1,0 +1,661 @@
+# ------- latimese.com "Pay Panel Digital" page spec -------
+# Site Under Test: http://www.latimes.com/
+# This is sub section of Pay panel page when "Digital Saver" is selected
+# Author: Samarth Sihare
+# Created on: 18/11/2015
+# History: Initial Draft
+
+@objects
+	#Plan Section
+	plan-container								xpath		/html/body/div[1]/div[3]/div[1]/div[2]
+	
+	#Digital Super Saver
+	digitalSuperSaver-box						xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]
+	digitalSuperSaver-box-title-section			xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[1]
+	digitalSuperSaver-box-title-section-title	xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[1]/h3
+	digitalSuperSaver-box-title-section-text	xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[1]/h4
+	digitalSuperSaver-box-image					xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[2]/img
+	digitalSuperSaver-box-priceCaption			xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/h2
+	digitalSuperSaver-box-durationText			xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/p
+	digitalSuperSaver-box-selectBtn				xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/a
+	
+	#Digital Saver
+	digitalSaver-box							xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]
+	digitalSaver-box-title-section				xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[1]
+	digitalSaver-box-title-section-title		xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[1]/h3
+	digitalSaver-box-title-section-text			xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[1]/h4
+	digitalSaver-box-image						xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[2]/img
+	digitalSaver-box-priceCaption				xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[3]/h2
+	digitalSaver-box-durationText				xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[3]/p
+	digitalSaver-box-selectBtn					xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[2]/div/div[3]/a
+	
+	#Digital
+	digital-box									xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]
+	digital-box-title-section					xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[1]
+	digital-box-title-section-title				xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[1]/h3
+	digital-box-title-section-text				xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[1]/h4
+	digital-box-image							xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[2]/img
+	digital-box-priceCaption					xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[3]/h2
+	digital-box-durationText					xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[3]/p
+	digital-box-selectBtn						xpath		/html/body/div[1]/div[3]/div[1]/div[2]/div[3]/div/div[3]/a
+
+	#Place Order
+	place-order-box								id			placeOrder
+	
+	#Terms and Conditions
+	terms-and-conditions						xpath		/html/body/div[1]/div[3]/div[1]/div[4]
+	terms-and-conditions-title					xpath		/html/body/div[1]/div[3]/div[1]/div[4]/div
+	terms-and-conditions-text					xpath		/html/body/div[1]/div[3]/div[1]/div[4]/p
+
+= Pay Panel - Digital Saver Selected =
+	@on *
+		#Common Specs (Box 1 and 3)
+		digital-box-title-section-title, digitalSuperSaver-box-title-section-title:	
+			css font-family contains "Arial"
+			
+		digital-box-title-section-text, digitalSuperSaver-box-title-section-text:
+			css font-family contains "Arial"
+			
+		digital-box-priceCaption, digitalSuperSaver-box-priceCaption:
+			css font-family contains "Belizio"
+			
+		digital-box-durationText, digitalSuperSaver-box-durationText:
+			css font-family contains "Arial"
+			
+		#Box 1 (Digital Super Saver)
+        digitalSuperSaver-box-title-section-title:
+			text is "Digital Super Saver"
+
+        digitalSuperSaver-box-title-section-text:
+			text is "2 Years of Unlimited Digital Access Saves 20%"
+		
+#        digitalSuperSaver-box-priceCaption:
+#			text is "then $3.99 / Week. Billed Every 2 Years"
+
+		digitalSuperSaver-box-durationText:
+			text is "then $3.99 / Week. Billed Every 2 Years"
+		
+		#Box 2 (Digital Saver)
+		digitalSaver-box-title-section:
+			css background-color is "rgba(69, 144, 188, 1)"
+		
+		digitalSaver-box-title-section-title:
+			text is "Digital Saver"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		digitalSaver-box-title-section-text:
+			text is "1 Year of Unlimited Digital Access Saves 10%"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		digitalSaver-box-priceCaption:
+#			text is "then $4.49 / Week. Billed Annually"
+			css font-family contains "Belizio"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		digitalSaver-box-durationText:
+			text is "then $4.49 / Week. Billed Annually"
+			css font-family contains "Arial"
+			css color is "rgba(255, 255, 255, 1)"
+			
+		#Box 3 (Digital)
+		digital-box-title-section-title:
+			text is "Digital"
+		
+		digital-box-title-section-text:
+			text is "3 Months of Unlimited Digital Access"
+
+#		digital-box-priceCaption:
+#			text is "then $4.99 / Week. Billed Quarterly"
+			
+		digital-box-durationText:
+			text is "then $4.99 / Week. Billed Quarterly"		
+
+		#Terms and Conditions	
+		terms-and-conditions-title:
+			text is "Terms & Conditions"
+			css font-family contains "Arial"
+			css color is "rgba(102, 102, 102, 1)"
+			
+		terms-and-conditions-text:
+			text is "By accepting this offer, you are agreeing to a continuous digital subscription. You have the right to cancel at any time by calling 1-800-88TIMES. This offer is valid for new Unlimited Digital Access members only and is non-transferable. The $0.99 introductory rate is valid for the first 10 days of service. After the introductory period, the subscription continues at $4.49 per week with a billing term of 52 weeks. The introductory offer price of $0.99 will be charged to your credit card, debit or bank account then after the introductory offer your credit card, debit or bank account will automatically be charged $233.48 every 52 weeks until you notify us to cancel. Prices on future billing periods may be higher and you will be notified. Please print a copy of this authorization or save a copy to your computer."
+			css font-family contains "Arial"
+			css color is "rgba(102, 102, 102, 1)"
+			
+	@on mobile_portrait, mobile_landscape
+		digital-box-title-section, digitalSuperSaver-box-title-section:
+			css background-color is "rgba(153, 153, 153, 1)"
+		
+		digital-box-title-section-title, digitalSuperSaver-box-title-section-title:	
+			css color is "rgba(19, 19, 19, 1)"
+		
+		digital-box-title-section-text, digitalSuperSaver-box-title-section-text:
+			css color is "rgba(19, 19, 19, 1)"
+			
+		digital-box-priceCaption, digitalSuperSaver-box-priceCaption:
+			css color is "rgba(0, 0, 0, 1)"
+		
+		digital-box-durationText, digitalSuperSaver-box-durationText:
+			css color is "rgba(102, 102, 102, 1)"
+			
+		digitalSuperSaver-box-image, digitalSaver-box-image, digital-box-image:
+			absent
+			
+	@on desktop_regular, desktop_wide, tablet_landscape, tablet_portrait
+		digital-box-title-section, digitalSuperSaver-box-title-section:
+			css background-color is "rgba(220, 219, 219, 1)"
+		
+		digital-box-title-section-title, digitalSuperSaver-box-title-section-title:	
+			css color is "rgba(102, 102, 102, 1)"
+		
+		digital-box-title-section-text, digitalSuperSaver-box-title-section-text:
+			css color is "rgba(102, 102, 102, 1)"
+			
+		digital-box-priceCaption, digitalSuperSaver-box-priceCaption:
+			css color is "rgba(0, 0, 0, 1)"
+		
+		digital-box-durationText, digitalSuperSaver-box-durationText:
+			css color is "rgba(102, 102, 102, 1)"
+			
+		digital-box-selectBtn, digitalSuperSaver-box-selectBtn:
+			css color is "rgba(204, 204, 204, 1)"
+		
+		digital-box-selectBtn, digitalSuperSaver-box-selectBtn:
+			text is "Select"
+			css font-family contains "Arial"
+			css color is "rgba(204, 204, 204, 1)"
+		
+	@on desktop_regular
+		#Box 1 (Digital Super Saver)
+		digitalSuperSaver-box:
+			height 373 px 
+			width 256 px 
+			inside plan-container 0 px left, 20 px top
+			
+		digitalSuperSaver-box-title-section:
+			width 100% of digitalSuperSaver-box/width
+			height 77 px
+			
+        digitalSuperSaver-box-title-section-title:
+			centered horizontally inside digitalSuperSaver-box-title-section
+			inside digitalSuperSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSuperSaver-box-title-section-text:
+			centered horizontally inside digitalSuperSaver-box-title-section
+			inside digitalSuperSaver-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digitalSuperSaver-box-image:
+			height 158 px 
+			width 205 px
+			inside digitalSuperSaver-box 77 px top, 25 px left, 26 px right
+			
+		digitalSuperSaver-box-priceCaption:
+			below digitalSuperSaver-box-image 16 px 
+			inside digitalSuperSaver-box 0 px left 
+			css font-size is "24px"
+		
+        digitalSuperSaver-box-durationText:
+			below digitalSuperSaver-box-priceCaption 8 px 
+			inside digitalSuperSaver-box 0 px left 
+			css font-size is "12px"
+		
+        digitalSuperSaver-box-selectBtn:
+			below digitalSuperSaver-box-durationText 15 px
+			inside digitalSuperSaver-box 72 px left, 20 px bottom
+			
+		#Box 2 (Digital Saver)
+		digitalSaver-box:
+			height 421 px 
+			width 256 px 
+			inside plan-container 272 px left, 0 px top
+			
+		digitalSaver-box-title-section:
+			width 100% of digitalSaver-box/width
+			height 77 px
+			
+        digitalSaver-box-title-section-title:
+			centered horizontally inside digitalSaver-box-title-section
+			inside digitalSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSaver-box-title-section-text:
+			centered horizontally inside digitalSaver-box-title-section
+			inside digitalSaver-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digitalSaver-box-image:
+			height 168 px 
+			width 218 px
+			inside digitalSaver-box 77 px top, 19 px left, 19 px right
+			
+			
+        digitalSaver-box-priceCaption:
+			below digitalSaver-box-image 16 px 
+			inside digitalSaver-box 0 px left 
+			css font-size is "24px"
+		
+        digitalSaver-box-durationText:
+			below digitalSaver-box-priceCaption 8 px 
+			inside digitalSaver-box 0 px left 
+			css font-size is "12px"
+		
+		#Box 3 (Digital)
+		digital-box:
+			height 356 px 
+			width 256 px 
+			inside plan-container 544 px left, 20 px top
+			
+		digital-box-title-section:
+			width 100% of digital-box/width
+			height 60 px
+			
+        digital-box-title-section-title:
+			centered horizontally inside digital-box-title-section
+			inside digital-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digital-box-title-section-text:
+			centered horizontally inside digital-box-title-section
+			inside digital-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digital-box-image:
+			height 158 px 
+			width 205 px
+			inside digital-box 60 px top, 25 px left, 26 px right
+
+		digital-box-priceCaption:
+			below digital-box-image 16 px 
+			inside digital-box 0 px left 
+			css font-size is "24px"
+		
+        digital-box-durationText:
+			below digital-box-priceCaption 8 px 
+			inside digital-box 0 px left 
+			css font-size is "12px"
+		
+        digital-box-selectBtn:
+			below digital-box-durationText 15 px
+			inside digital-box 72 px left, 20 px bottom
+		
+		#Terms and Conditions
+		terms-and-conditions:
+			width 800 px
+			height 148 px
+			inside screen 225 px left
+			below place-order-box 15 px
+			
+		terms-and-conditions-title:
+			inside terms-and-conditions 0 px top left
+			css font-size is "12px"
+			
+		terms-and-conditions-text:
+			inside terms-and-conditions 19 px top, 0 px left
+			css font-size is "12px"
+		
+	@on tablet_portrait
+		#Box 1 (Digital Super Saver)
+		digitalSuperSaver-box:
+			height 334 px 
+			width 192 px 
+			inside plan-container 0 px left, 20 px top
+			
+		digitalSuperSaver-box-title-section:
+			width 100% of digitalSuperSaver-box/width
+			height 77 px
+			
+        digitalSuperSaver-box-title-section-title:
+			centered horizontally inside digitalSuperSaver-box-title-section
+			inside digitalSuperSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSuperSaver-box-title-section-text:
+			centered horizontally inside digitalSuperSaver-box-title-section
+			inside digitalSuperSaver-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digitalSuperSaver-box-image:
+			height 119 px 
+			width 154 px
+			inside digitalSuperSaver-box 77 px top, 19 px left, 19 px right
+			
+		digitalSuperSaver-box-priceCaption:
+			below digitalSuperSaver-box-image 16 px 
+			inside digitalSuperSaver-box 0 px left 
+			css font-size is "24px"
+		
+        digitalSuperSaver-box-durationText:
+			below digitalSuperSaver-box-priceCaption 8 px 
+			inside digitalSuperSaver-box 0 px left 
+			css font-size is "12px"
+		
+        digitalSuperSaver-box-selectBtn:
+			below digitalSuperSaver-box-durationText 15 px
+			inside digitalSuperSaver-box 40 px left, 20 px bottom
+			
+		#Box 2 (Digital Saver)
+		digitalSaver-box:
+			height 379 px 
+			width 192 px 
+			inside plan-container 204 px left, 0 px top
+			
+		digitalSaver-box-title-section:
+			width 100% of digitalSaver-box/width
+			height 77 px
+			
+        digitalSaver-box-title-section-title:
+			centered horizontally inside digitalSaver-box-title-section
+			inside digitalSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSaver-box-title-section-text:
+			centered horizontally inside digitalSaver-box-title-section
+			inside digitalSaver-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digitalSaver-box-image:
+			height 126 px 
+			width 163 px
+			inside digitalSaver-box 77 px top, 14 px left, 15 px right
+			
+			
+        digitalSaver-box-priceCaption:
+			below digitalSaver-box-image 16 px 
+			inside digitalSaver-box 0 px left 
+			css font-size is "24px"
+		
+        digitalSaver-box-durationText:
+			below digitalSaver-box-priceCaption 8 px 
+			inside digitalSaver-box 0 px left 
+			css font-size is "12px"
+		
+		#Box 3 (Digital)
+		digital-box:
+			height 334 px 
+			width 192 px 
+			inside plan-container 408 px left, 20 px top
+			
+		digital-box-title-section:
+			width 100% of digital-box/width
+			height 77 px
+			
+        digital-box-title-section-title:
+			centered horizontally inside digital-box-title-section
+			inside digital-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digital-box-title-section-text:
+			centered horizontally inside digital-box-title-section
+			inside digital-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digital-box-image:
+			height 119 px 
+			width 154 px
+			inside digital-box 77 px top, 19 px left, 19 px right
+
+		digital-box-priceCaption:
+			below digital-box-image 16 px 
+			inside digital-box 0 px left 
+			css font-size is "24px"
+		
+        digital-box-durationText:
+			below digital-box-priceCaption 8 px 
+			inside digital-box 0 px left 
+			css font-size is "12px"
+		
+        digital-box-selectBtn:
+			below digital-box-durationText 15 px
+			inside digital-box 40 px left, 20 px bottom
+		
+		#Terms and Conditions
+		terms-and-conditions:
+			width 600 px
+			height 177 px
+			inside screen 69 px left
+			below place-order-box 15 px
+			
+		terms-and-conditions-title:
+			inside terms-and-conditions 0 px top left
+			css font-size is "12px"
+			
+		terms-and-conditions-text:
+			inside terms-and-conditions 19 px top, 0 px left
+			css font-size is "12px"
+			
+	@on tablet_landscape
+		#Box 1 (Digital Super Saver)
+		digitalSuperSaver-box:
+			height 346 px 
+			width 256 px 
+			inside plan-container 0 px left, 20 px top
+			
+		digitalSuperSaver-box-title-section:
+			width 100% of digitalSuperSaver-box/width
+			height 77 px
+			
+        digitalSuperSaver-box-title-section-title:
+			centered horizontally inside digitalSuperSaver-box-title-section
+			inside digitalSuperSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSuperSaver-box-title-section-text:
+			centered horizontally inside digitalSuperSaver-box-title-section
+			inside digitalSuperSaver-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digitalSuperSaver-box-image:
+			height 158 px 
+			width 205 px
+			inside digitalSuperSaver-box 87 px top, 25 px left, 26 px right
+			
+		digitalSuperSaver-box-priceCaption:
+			below digitalSuperSaver-box-image 16 px 
+			inside digitalSuperSaver-box 0 px left 
+			css font-size is "24px"
+		
+        digitalSuperSaver-box-durationText:
+			below digitalSuperSaver-box-priceCaption 0 px 
+			inside digitalSuperSaver-box 0 px left 
+			css font-size is "12px"
+		
+        digitalSuperSaver-box-selectBtn:
+			below digitalSuperSaver-box-durationText 15 px
+			inside digitalSuperSaver-box 72 px left, 20 px bottom
+			
+		#Box 2 (Digital Saver)
+		digitalSaver-box:
+			height 389 px 
+			width 256 px 
+			inside plan-container 272 px left, 0 px top
+			
+		digitalSaver-box-title-section:
+			width 100% of digitalSaver-box/width
+			height 77 px
+			
+        digitalSaver-box-title-section-title:
+			centered horizontally inside digitalSaver-box-title-section
+			inside digitalSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSaver-box-title-section-text:
+			centered horizontally inside digitalSaver-box-title-section
+			inside digitalSaver-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digitalSaver-box-image:
+			height 168 px 
+			width 218 px
+			inside digitalSaver-box 87 px top, 19 px left, 19 px right
+			
+        digitalSaver-box-priceCaption:
+			below digitalSaver-box-image 16 px 
+			inside digitalSaver-box 0 px left 
+			css font-size is "24px"
+		
+        digitalSaver-box-durationText:
+			below digitalSaver-box-priceCaption 0 px 
+			inside digitalSaver-box 0 px left 
+			css font-size is "12px"
+		
+		#Box 3 (Digital)
+		digital-box:
+			height 346 px 
+			width 256 px 
+			inside plan-container 544 px left, 20 px top
+			
+		digital-box-title-section:
+			width 100% of digital-box/width
+			height 77 px
+			
+        digital-box-title-section-title:
+			centered horizontally inside digital-box-title-section
+			inside digital-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digital-box-title-section-text:
+			centered horizontally inside digital-box-title-section
+			inside digital-box-title-section 37 px top
+			css font-size is "16px"
+			
+        digital-box-image:
+			height 158 px 
+			width 205 px
+			inside digital-box 87 px top, 25 px left, 26 px right
+
+		digital-box-priceCaption:
+			below digital-box-image 16 px 
+			inside digital-box 0 px left 
+			css font-size is "24px"
+		
+        digital-box-durationText:
+			below digital-box-priceCaption 0 px 
+			inside digital-box 0 px left 
+			css font-size is "12px"
+		
+        digital-box-selectBtn:
+			below digital-box-durationText 15 px
+			inside digital-box 72 px left, 20 px bottom
+		
+		#Terms and Conditions
+		terms-and-conditions:
+			width 800 px
+			height 148 px
+			inside screen 106 px left
+			below place-order-box 20 px
+			
+		terms-and-conditions-title:
+			inside terms-and-conditions 0 px top left
+			css font-size is "12px"
+			
+		terms-and-conditions-text:
+			inside terms-and-conditions 19 px top, 0 px left
+			css font-size is "12px"
+			
+	@on mobile_portrait
+		#Box 1 (Digital Super Saver)
+		digitalSuperSaver-box:
+			height 152 px 
+			width 269 px 
+			inside plan-container 10 px left, 0 px top
+			
+		digitalSuperSaver-box-title-section:
+			width 100% of digitalSuperSaver-box/width
+			height 87 px
+			
+        digitalSuperSaver-box-title-section-title:
+			inside digitalSuperSaver-box-title-section 10 px top, 15 px left
+			inside digitalSuperSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSuperSaver-box-title-section-text:
+			inside digitalSuperSaver-box-title-section 42 px top, 15 px left
+			inside digitalSuperSaver-box-title-section 42 px top
+			css font-size is "16px"
+			
+		digitalSuperSaver-box-priceCaption:
+			below digitalSuperSaver-box-title-section 12 px
+			inside digitalSuperSaver-box 15 px left 
+			css font-size is "30px"
+		
+        digitalSuperSaver-box-durationText:
+			below digitalSuperSaver-box-priceCaption 8 px 
+			inside digitalSuperSaver-box 15 px left 
+			css font-size is "12px"
+			
+		#Box 2 (Digital Saver)
+		digitalSaver-box:
+			height 160 px 
+			width 269 px 
+			inside plan-container 10 px left, 172 px top
+			
+		digitalSaver-box-title-section:
+			width 100% of digitalSaver-box/width
+			height 87 px
+			
+        digitalSaver-box-title-section-title:
+			inside digitalSaver-box-title-section 10 px top, 15 px left
+			inside digitalSaver-box-title-section 10 px top
+			css font-size is "18px"
+			
+        digitalSaver-box-title-section-text:
+			inside digitalSaver-box-title-section 42 px top, 15 px left
+			inside digitalSaver-box-title-section 42 px top
+			css font-size is "16px"
+			
+        digitalSaver-box-priceCaption:
+			below digitalSaver-box-title-section 12 px 
+			inside digitalSaver-box 15 px left 
+			css font-size is "30px"
+		
+        digitalSaver-box-durationText:
+			below digitalSaver-box-priceCaption 8 px 
+			inside digitalSaver-box 15 px left 
+			css font-size is "12px"
+		
+		#Box 3 (Digital)
+		digital-box:
+			height 152 px 
+			width 269 px 
+			inside plan-container 10 px left, 352 px top
+			
+		digital-box-title-section:
+			width 100% of digital-box/width
+			height 87 px
+			
+        digital-box-title-section-title:
+			inside digital-box-title-section 10 px top, 15 px left
+			css font-size is "18px"
+			
+        digital-box-title-section-text:
+			inside digital-box-title-section 42 px top, 15 px left
+			inside digital-box-title-section 42 px top
+			css font-size is "16px"
+
+		digital-box-priceCaption:
+			below digital-box-title-section 12 px 
+			inside digital-box 15 px left 
+			css font-size is "30px"
+		
+        digital-box-durationText:
+			below digital-box-priceCaption 8 px 
+			inside digital-box 15 px left 
+			css font-size is "12px"
+		
+		#Terms and Conditions
+		terms-and-conditions:
+			width 289 px
+			height 321 px
+			inside screen 0 px left
+			below place-order-box 20 px
+			
+		terms-and-conditions-title:
+			inside terms-and-conditions 0 px top, 10 px left
+			css font-size is "12px"
+			
+		terms-and-conditions-text:
+			inside terms-and-conditions 19 px top, 10 px left
+			css font-size is "12px"

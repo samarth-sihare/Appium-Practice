@@ -1,5 +1,6 @@
 package com.latime.app.pageobject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.assertj.core.api.AssertDelegateTarget;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.latime.app.utilities.AndroidTouchScreenGestures;
 
 import io.appium.java_client.TouchAction;
@@ -98,11 +101,11 @@ public class SectionFrontPageObject extends CommonFunctions{
 		}
 	}
 	
-	public void waitForPageHeaderLogo() throws InterruptedException{
+	public void waitForPageHeaderLogo(){
 		waitUntil(ExpectedConditions.presenceOfElementLocated(headerLogo), 15);
 	}
 	
-    public void clickHeaderMenuBtn() throws InterruptedException{
+    public void clickHeaderMenuBtn(){
     	waitForPageHeaderLogo();
 		headerMenuBtn.click();
     }
@@ -228,13 +231,25 @@ public class SectionFrontPageObject extends CommonFunctions{
     public void checkSwipeSectionFrontToLastTab() throws InterruptedException{
     	while (getlastTabIndex() != getSelectedTabTitleIndex()){
 			String befoerActionSelectedTab = getSelectedTabTitle();
-			swipeRightToLeftPortraitMode(androidDriver);
+			swipeRightToLeftAt70PercentFromTop(androidDriver);
 			String afterActionSelectedTab = getSelectedTabTitle();
 			
-			assert (befoerActionSelectedTab ==  afterActionSelectedTab) : "Page was not swipped as expected"; 
+			assert (!befoerActionSelectedTab.equalsIgnoreCase(afterActionSelectedTab)) : "Page was not swipped to right tab as expected"; 
 			
     	}
     }
+    
+    public void checkSwipeSectionFrontToFirstTab() throws InterruptedException{
+    	while (getSelectedTabTitleIndex() != 0 ){
+			String befoerActionSelectedTab = getSelectedTabTitle();
+			swipeLeftToRightAt70PercentFromTop(androidDriver);
+			String afterActionSelectedTab = getSelectedTabTitle();
+			
+			assert (!befoerActionSelectedTab.equalsIgnoreCase(afterActionSelectedTab)) : "Page was not swipped to left tab as expected"; 
+			
+    	}
+    }
+    
     
     public void checkJumpSectionFrontToLastTab() throws InterruptedException{
 		while (getlastTabIndex() != getSelectedTabTitleIndex()){
@@ -244,7 +259,7 @@ public class SectionFrontPageObject extends CommonFunctions{
 			String afterActionSelectedTab = getSelectedTabTitle();
 		
 			//Assertion
-			assert (befoerActionSelectedTab !=  afterActionSelectedTab) : "User is unable to jump sections as expected";
+			assert (!befoerActionSelectedTab.equalsIgnoreCase(afterActionSelectedTab)) : "User is unable to jump sections as expected";
 		}
 
     }
@@ -274,6 +289,43 @@ public class SectionFrontPageObject extends CommonFunctions{
     		if(beforeActionLastTabTitle.contentEquals(afterActionLastTabTitle)){
     			assert false : "The tab you are looking for is not visible";
     		}
+    	}
+    }
+    
+    public ImmutableList<String> getListOfTabItems(){
+    	List<String> tempTabList = new ArrayList<String>();
+    	boolean proceed = true;
+    	gotoFirstTab();
+    	
+    	while (proceed){
+    		
+    		for(WebElement tab : tabTitle){
+    			tempTabList.add(tab.getText());
+    		}
+    		
+    		String itemBeforeAction = getlastTabTitle();
+    		moveElemetnt1ToElement2Position(androidDriver, lastTab(), firstTab());
+    		String itemAfterAction = getlastTabTitle();
+    		
+    		if (itemBeforeAction.equals(itemAfterAction))
+    			proceed = false;
+    	}
+    	
+    	ImmutableList<String> tabList = ImmutableSet.copyOf(tempTabList).asList();
+    	
+    	return tabList;
+    }
+    
+    private void gotoFirstTab(){
+    	boolean proceed = true;
+    	
+    	while(proceed){
+    		String beforeActionFirstTabTitle = firstTab().getText();
+    		firstTab().click();
+    		String afterActionFirstTabTitle = firstTab().getText();
+    		
+    		if (beforeActionFirstTabTitle.equals(afterActionFirstTabTitle))
+    			proceed = false;
     	}
     }
 }

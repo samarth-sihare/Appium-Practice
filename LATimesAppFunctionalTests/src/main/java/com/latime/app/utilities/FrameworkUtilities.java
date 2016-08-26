@@ -1,32 +1,33 @@
 package com.latime.app.utilities;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.openqa.selenium.WebElement;
 
 import io.appium.java_client.NetworkConnectionSetting;
+import io.appium.java_client.android.AndroidDriver;
 
 
 public class FrameworkUtilities {
 	
-	private static boolean hasInternetAccess() throws MalformedURLException, IOException {
-	
-		HttpURLConnection urlc = (HttpURLConnection) 
-				(new URL("http://clients3.google.com/generate_204").openConnection());
-		urlc.setRequestProperty("User-Agent", "Android");
-		urlc.setRequestProperty("Connection", "close");
-		urlc.setConnectTimeout(1500); 
-		urlc.connect();
+	private static boolean isWiFiEnabled(AndroidDriver<WebElement> driver){
+		try{
+			NetworkConnectionSetting networkConnection = ((AndroidDriver<WebElement>) driver).getNetworkConnection();
+			
+			Boolean status = networkConnection.wifiEnabled();
+			
+			return status;
+		}
+		catch (Exception e){
+			System.out.println(e);
+			return false;
+		}
 		
-		return (urlc.getResponseCode() == 204 && urlc.getContentLength() == 0);
 	}
 	
-	
-	public static void continueIfInternetIsWorking() throws Exception{
-		if(!hasInternetAccess())
-			System.exit(1);
-			throw new Exception("Skipping test(s) because internet is not available.");
+	public static void continueIfWiFiIsConnected(AndroidDriver<WebElement> driver) throws Exception{
+		if(!isWiFiEnabled(driver)){
+			throw new Exception("Skipping test(s) because Wi-Fi is not connected.");
+		}
+			
 	}
 
 }
